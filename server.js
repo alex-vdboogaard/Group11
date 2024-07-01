@@ -6,6 +6,14 @@ const { Server } = require('socket.io');
 const app = express();
 const server = createServer(app);
 const io = new Server(server);
+//****************************************************************************************
+// global variables
+
+// map of all users in the game
+var users = new Map();
+
+// arr of all active sessions' gameIDs stored in an array
+var gamesInSession = []; 
 
 //****************************************************************************************
 //middleware
@@ -14,7 +22,11 @@ app.use(express.static(__dirname));
 app.get('/', (req, res) => {
     res.sendFile(join(__dirname, 'index.html'));
 });
-
+//****************************************************************************************
+app.post('/', (req, res) => {
+    console.log('post', req);
+});
+//****************************************************************************************
 app.get('/gamehost', (req, res) => {
     res.sendFile(join(__dirname, 'host.html'));
 });
@@ -33,6 +45,8 @@ function generateGameID() {
 io.on('connection', (socket) => {
     console.log('a user connected');
 
+    // create a new game on the game host
+    // we want to be able to display the gameID on the game host UI 
     socket.on('createGame', () => {
         const gameID = generateGameID();
         console.log('created a game');
@@ -41,6 +55,7 @@ io.on('connection', (socket) => {
         console.log('Game created with a id of: ', gameID);
     });
 
+    // allow players to join a game based on gameID
     socket.on('joinGame', ({ username, gameID }) => {
         socket.join(gameID);
         io.to(gameID).emit('playerJoined', { username });

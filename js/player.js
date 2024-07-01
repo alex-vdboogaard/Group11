@@ -9,6 +9,9 @@ joinForm.addEventListener("submit", (event) => {
     const gameID = document.getElementById("gameID").value;
     
     socket.emit("joinGame", { username, gameID });
+
+    username.value = '';
+    gameID.value = '';
 });
 
 socket.on("playerJoined", ({ username }) => {
