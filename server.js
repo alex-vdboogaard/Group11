@@ -9,9 +9,6 @@ const io = new Server(server);
 //****************************************************************************************
 // global variables
 
-// map of all users in the game
-// var users = new Map();
-
 // arr of all active sessions' gameIDs stored in an array
 var gamesInSession = []; 
 
@@ -41,7 +38,7 @@ app.post('/', (req, res) => {
         res.json({"Status" : "Error", "Message" : "You have to put in a gameID"});
         return;
     }
-    else if (game && game.users.includes(req.body.username))
+    else if (game && game.users.some(user => user.username === req.body.username))
     {
         //Errormessage
         res.json({"Status" : "Error", "Message" : "Username already exists"});
