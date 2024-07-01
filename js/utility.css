@@ -1,0 +1,61 @@
+.pop-top {
+    position: fixed;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: top 0.2s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1001;
+    font-size: 21px;
+    font-family: Arial, Helvetica, sans-serif;
+    max-width: 100%;
+}
+
+.pop-success {
+    background-color: green;
+    padding: 0px 20px;
+    color: white;
+}
+
+.pop-input {
+    padding: 10px 20px;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.pop-error {
+    background-color: rgb(186, 12, 0);
+    padding: 0px 20px;
+    color: white;
+}
+
+.pop-close {
+    margin-left: 20px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.pop-svg {
+    width: 20px;
+    height: 20px;
+}
+
+@media (max-width:570px) {
+    .pop-top {
+        max-width: 90%;
+        font-size: 19px;
+        justify-content: center;
+    }
+
+    .pop-confirm {
+        justify-content: start;
+        align-items: center;
+        text-align: center;
+        backdrop-filter: blur(100px);
+        background-color: rgb(255, 255, 255);
+        padding: 10px;
+        font-size: 23px;
+    }
+}

@@ -4,19 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Active game - </title> <!-- Insert game code in here -->
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/js/utility.css">
+    <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
     <main>
         <h1>Game code - </h1>
         <div style="display: flex;">
             <h2>3:00</h2> <!--Time remaining-->
-            <button class="btn" id="start game">Start game</button>
-            <button class="btn" id="reset game">Reset game</button>
+            <button class="btn" id="start-game">Start game</button>
+            <button class="btn" id="reset-game">Reset game</button>
         </div>   
     </main>
 </body>
 
 <script src="./js/utility.js"></script>
+<script>
+    document.querySelector("#start-game").addEventListener("click", () => {
+        simplePop("success", "Game starting...");
+    });
+</script>
 
 </html>
