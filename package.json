@@ -1,0 +1,15 @@
+{
+  "name": "group11",
+  "version": "1.0.0",
+  "description": "BBD Vac Week 2024 - Group 11",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Group11",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5"
+  }
+}
