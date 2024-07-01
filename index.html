@@ -12,27 +12,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h2>Maze Wars</h2>
-
-    <div class="form-container">
-        <form id="gamePlayer" action="">
-
-            <div class="mb-3">
-                <label asp-for="Username" class="form-label">Username</label>
-                <input asp-for="Username" class="form-control" />
-                <div><span asp-validation-for="Username" class="text-danger"></span></div>
-            </div>
-    
-            <div class="mb-3">
-                <label asp-for="Code" class="form-label">Code</label>
-                <input asp-for="Code" class="form-control" />
-                <div><span asp-validation-for="Code" class="text-danger"></span></div>
-            </div>
-    
-            <button class="btn btn-primary" type="submit">Create Session</button>
-        </form>
-    </div>    
-
+    <h1>Join Game</h1>
+    <form id="joinForm">
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="text" id="gameID" placeholder="Game ID" required>
+        <button type="submit">Join</button>
+    </form>
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="js/player.js" defer></script>
 </body>
