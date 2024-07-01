@@ -32,6 +32,12 @@ app.post('/', (req, res) => {
         res.json({"Status" : "Error", "Message" : "You have to put in a username"});
         return;
     }
+    else if (!gamesInSession.some(game => game.gameID === req.body.gameID))
+    {
+        //Errormessage
+        res.json({"Status" : "Error", "Message" : "You have to enter a valid gameID"});
+        return;
+    }
     else if (!req.body.gameID)
     {
         //Errormessage
@@ -97,12 +103,12 @@ io.on('connection', (socket) => {
 
         console.log(gamesInSession);
         const game = gamesInSession.find(gameObj => gameObj.gameID === gameID);
-        console.log(game.users);
+        // console.log(game.users);
         if (game) {
             game.users.push({"username": username, "score": 0});
         }
         console.log(gamesInSession);
-        console.log(game.users);
+        // console.log(game.users);
 
 
         io.to(gameID).emit('playerJoined', { username });
