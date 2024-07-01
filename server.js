@@ -18,13 +18,30 @@ var gamesInSession = [];
 //****************************************************************************************
 //middleware
 app.use(express.static(__dirname));
+
+app.use(express.json());
 //****************************************************************************************
 app.get('/', (req, res) => {
     res.sendFile(join(__dirname, 'index.html'));
 });
 //****************************************************************************************
 app.post('/', (req, res) => {
-    console.log('post', req);
+
+    if (!req.body.username)
+    {
+        //Errormessage
+        res.json({"Status" : "Error", "Message" : "You have to put in a username"});
+        return;
+    }
+    else if (users.has(req.body.username))
+    {
+        //Errormessage
+        res.json({"Status" : "Error", "Message" : "Username already exists"});
+        return;
+    }
+
+    res.json({"Status" : "Success"});
+    return;
 });
 //****************************************************************************************
 app.get('/gamehost', (req, res) => {
@@ -58,6 +75,9 @@ io.on('connection', (socket) => {
     // allow players to join a game based on gameID
     socket.on('joinGame', ({ username, gameID }) => {
         socket.join(gameID);
+        console.log(users);
+        users.set(username, socket.id);
+        console.log(users);
         io.to(gameID).emit('playerJoined', { username });
         console.log(`${username} joined game ${gameID}`);
     });
@@ -66,8 +86,8 @@ io.on('connection', (socket) => {
         console.log('user disconnected');
     });
 });
-
-
+//****************************************************************************************
 server.listen(3000, () => {
   console.log('server running at http://localhost:3000');
 });
+//****************************************************************************************
