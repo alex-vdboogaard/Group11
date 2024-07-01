@@ -10,7 +10,7 @@ const io = new Server(server);
 // global variables
 
 // map of all users in the game
-var users = new Map();
+// var users = new Map();
 
 // arr of all active sessions' gameIDs stored in an array
 var gamesInSession = []; 
@@ -27,18 +27,28 @@ app.get('/', (req, res) => {
 //****************************************************************************************
 app.post('/', (req, res) => {
 
+    const game = gamesInSession.find(gameObj => gameObj.gameID === req.body.gameID);
+
     if (!req.body.username)
     {
         //Errormessage
         res.json({"Status" : "Error", "Message" : "You have to put in a username"});
         return;
     }
-    else if (users.has(req.body.username))
+    else if (!req.body.gameID)
+    {
+        //Errormessage
+        res.json({"Status" : "Error", "Message" : "You have to put in a gameID"});
+        return;
+    }
+    else if (game && game.users.includes(req.body.username))
     {
         //Errormessage
         res.json({"Status" : "Error", "Message" : "Username already exists"});
         return;
     }
+
+    // add some additional checking here
 
     res.json({"Status" : "Success"});
     return;
@@ -70,14 +80,28 @@ io.on('connection', (socket) => {
         socket.join(gameID);
         socket.emit('gameCreated', {gameID});
         console.log('Game created with a id of: ', gameID);
+        console.log(gamesInSession);
+        gamesInSession.push({"gameID": gameID, "users": [], "round": 0});
+        console.log(gamesInSession);
     });
 
     // allow players to join a game based on gameID
     socket.on('joinGame', ({ username, gameID }) => {
         socket.join(gameID);
-        console.log(users);
-        users.set(username, socket.id);
-        console.log(users);
+        // console.log(users);
+        // users.set(username, socket.id);
+        // console.log(users);
+
+        console.log(gamesInSession);
+        const game = gamesInSession.find(gameObj => gameObj.gameID === gameID);
+        console.log(game.users);
+        if (game) {
+            game.users.push({"username": username, "score": 0});
+        }
+        console.log(gamesInSession);
+        console.log(game.users);
+
+
         io.to(gameID).emit('playerJoined', { username });
         console.log(`${username} joined game ${gameID}`);
     });
