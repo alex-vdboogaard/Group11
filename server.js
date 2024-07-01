@@ -44,6 +44,12 @@ app.post('/', (req, res) => {
         res.json({"Status" : "Error", "Message" : "Username already exists"});
         return;
     }
+    else if (game && game.users.length >= 4)
+    {
+        //Errormessage
+        res.json({"Status" : "Error", "Message" : "This game is already full."});
+        return;
+    }
 
     // add some additional checking here
 
