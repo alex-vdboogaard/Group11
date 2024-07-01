@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BBD | Group 11</title>
+    <title>Host a game</title>
     <link rel="stylesheet" href="styles.css">
 
     <!--Montserrat-->
@@ -11,33 +11,19 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
 </head>
-<body>
-    <main>           
-        <h1>Maze Wars</h1> 
-        <div class="form-container">
-                       
-            <form id="gamePlayer" action="">
-    
-                <div class="field-holder">
-                    <label for="Username">Username</label>
-                    <input type="text" id="Username" required/>                
-                </div>
-        
-                <div class="field-holder">
-                    <label for="Code">Code</label>
-                    <input type="text" id="Code" required/>                    
-                </div>
-        
-                <button type="submit">Create Session</button>
-            </form>
-        </div> 
-    
-        <div>
-    
-        </div>
+<body style="display: flex; align-items: center;">
+    <main>
+        <h1>Maze War</h1>
+        <p>Host a game by clicking below or <a href="/index.html">join a game</a></p>
+        <form id="hostGame" method="post" action="hostGame">
+            <div class="inputGroup">
+                <label for="gameID">Game ID</label>
+                <input type="text" id="gameID" placeholder="28234" required>
+            </div>
+            <button class="btn" type="submit">Host</button>
+        </form>
     </main>
-    
-
+    <img src="/mazeImage.png" alt="maze image">
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="js/player.js" defer></script>
 </body>
