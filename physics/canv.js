@@ -1,7 +1,10 @@
 const canvas = document.getElementById("myCanvas");
 const ctx = canvas.getContext("2d");
 
-let t = 10.0;
+let t = 1.0;
+let speed = 1000;
+let bounciness = 2 / 10;
+const RADIUS = 10;
 
 let x0 = 250;
 let y0 = 250;
@@ -28,25 +31,14 @@ ctx.stroke();
 
 
 function handleOrientation(event) {
-    let alpha = event.alpha
     let beta = event.beta
     let gamma = event.gamma
 
     b = beta
     g = gamma
 
-    if (b > 60) {
-        b = 60
-    }
-    else if (b < -60) {
-        b = -60
-    }
-    if (g > 60) {
-        g = 60
-    }
-    else if (g < -60) {
-        g = -60
-    }
+    b = Math.min(Math.max(beta, -60), 60);
+    g = Math.min(Math.max(gamma, -60), 60);
 }
 
 
@@ -79,11 +71,12 @@ async function requestDeviceOrientation() {
 
 function moving() {
 
-    ctx.fillStyle = "white";
-    ctx.fillRect(0, 0, 500, 500);
+    // ctx.fillStyle = "white";
+    // ctx.fillRect(0, 0, 500, 500);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    ax = 10 * Math.sin(g);
-    ay = 10 * Math.sin(b);
+    ax = speed * Math.sin(g * Math.PI / 180);
+    ay = speed * Math.sin(b * Math.PI / 180);
 
     vfx = v0x + ax * t / 1000.0;
     vfy = v0y + ay * t / 1000.0;
@@ -91,18 +84,34 @@ function moving() {
     xf = x0 + v0x * t / 1000.0 + 0.5 * ax * (t / 1000) ** 2;
     yf = y0 + v0y * t / 1000.0 + 0.5 * ay * (t / 1000) ** 2;
 
+
+    if (xf < RADIUS) {
+        xf = RADIUS;
+        vfx = -vfx * bounciness;
+    } else if (xf > canvas.width - RADIUS) {
+        xf = canvas.width - RADIUS;
+        vfx = -vfx * bounciness;
+    }
+    if (yf < RADIUS) {
+        yf = RADIUS;
+        vfy = -vfy * bounciness;
+    } else if (yf > canvas.height - RADIUS) {
+        yf = canvas.height - RADIUS;
+        vfy = -vfy * bounciness;
+    }
+
     v0x = vfx;
     v0y = vfy;
     x0 = xf;
     y0 = yf;
 
     ctx.beginPath();
-    ctx.arc(xf, yf, 10, 0, 2 * Math.PI);
+    ctx.arc(xf, yf, RADIUS, 0, 2 * Math.PI);
     ctx.fillStyle = "red";
     ctx.fill();
     ctx.stroke();
 
-    console.log(g);
+    console.log(vfx);
     // console.log(g); 
 }
 
