@@ -12,13 +12,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Join Game</h1>
-    <form id="joinForm">
-        <input type="text" id="username" placeholder="Username" required>
-        <input type="text" id="gameID" placeholder="Game ID" required>
-        <button type="submit">Join</button>
-    </form>
-
+    <main id="join-game-main">
+        <h1>Maze War</h1>
+        <p>Join a game by typing in the code and your username or <a href="/index.html">host a session</a></p>
+        <form id="joinForm" method="post" action="joinGame">
+            <div class="inputGroup">
+                <label for="gameID">Game ID</label>
+                <input type="text" id="gameID" placeholder="28234" required>
+            </div>
+            <div class="inputGroup">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Anakin Skywalker" required>
+            </div>
+            <button class="btn" type="submit">Join</button>
+        </form>
+    </main>
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="js/player.js" defer></script>
 </body>

@@ -20,3 +20,42 @@ main {
     font-size: 20px;
     cursor: pointer;
 }
+
+#joinForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin-top: 20px;
+}
+
+.inputGroup label {
+    padding-bottom: 5px;
+}
+
+input {
+    padding: 10px 20px;
+    border: 1px solid grey;
+}
+
+#join-game-main {
+    max-width: 600px;
+    margin: auto;
+}
+
+h1 {
+    font-size: 70px;
+    font-weight: 500;
+    margin-bottom: 0px;
+}
+
+p {
+    margin-top: 5px;
+    font-size: 25px;
+    color: #414141;
+    max-width: 500px;
+}
