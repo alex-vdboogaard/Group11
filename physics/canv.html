@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Active game - </title> <!-- Insert game code in here -->
-    <link rel="stylesheet" href="/js/utility.css">
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="../js/utility.css">
+    <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
     <main>
@@ -15,8 +15,6 @@
             <button class="btn" id="start-game">Start game</button>
             <button class="btn" id="reset-game">Reset game</button>
         </div>   
-        <button onclick="requestDeviceOrientation()">Start</button>
-
         <canvas id="myCanvas" width="500" height="500" style="border:1px solid #000000;">
         Sorry, your browser does not support canvas.
         </canvas>
@@ -24,9 +22,10 @@
     </main>
 </body>
 <script src="canv.js"></script>
-<script src="./js/utility.js"></script>
+<script src="../js/utility.js"></script>
 <script>
     document.querySelector("#start-game").addEventListener("click", () => {
+        requestDeviceOrientation();
         simplePop("success", "Game starting...");
     });
 </script>
