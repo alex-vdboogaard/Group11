@@ -20,3 +20,42 @@ main {
     font-size: 20px;
     cursor: pointer;
 }
+  
+form {
+    width: 50%; /* adjust this value to control the form's width */
+}
+
+h1 {
+    text-align: center;
+    margin-top: 55px;
+}
+
+input, label, button {
+    display:block;
+    font-size: 1em;
+    width: 100%;
+    height: 30px;
+}
+
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* vh stands for viewport height */
+    
+    
+}
+
+.field-holder {
+    position: relative;
+    margin-bottom: 1.25em;
+}
+
+button {
+    color :antiquewhite;
+    background-color: blue;
+
+}
+
+
