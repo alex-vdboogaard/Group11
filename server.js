@@ -105,7 +105,7 @@ io.on('connection', (socket) => {
         const game = gamesInSession.find(gameObj => gameObj.gameID === gameID);
         // console.log(game.users);
         if (game) {
-            game.users.push({"username": username, "score": 0, "sockedID": socket.id});
+            game.users.push({"username": username, "score": 0, "socketID": socket.id});
         }
         console.log(gamesInSession);
         console.log(game.users);
@@ -119,8 +119,17 @@ io.on('connection', (socket) => {
         for (const room of socket.rooms) {
             if (room !== socket.id) {
                 socket.to(room).emit("user has left", socket.id);
-                console.log(room.users);
-                console.log('user disconnected', socket.id);
+
+                const game = gamesInSession.find(gameObj => gameObj.gameID == room);
+
+                if (game) {
+                    // Find the index of the user in the game's users array
+                    const userIndex = game.users.findIndex(user => user.socketID == socket.id);
+                    if (userIndex !== -1) {
+                        // Remove the user from the users array
+                        game.users.splice(userIndex, 1);
+                    }
+                }
             }
         }
     });
