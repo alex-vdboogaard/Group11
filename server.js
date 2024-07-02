@@ -24,6 +24,7 @@ app.get('/', (req, res) => {
 //****************************************************************************************
 app.post('/', (req, res) => {
 
+    console.log("POSSTTTTTT");
     const game = gamesInSession.find(gameObj => gameObj.gameID === req.body.gameID);
 
     if (!req.body.username)
@@ -64,7 +65,7 @@ app.post('/', (req, res) => {
 });
 //****************************************************************************************
 app.get('/gamehost', (req, res) => {
-    res.sendFile(join(__dirname, 'host.html'));
+    res.sendFile(join(__dirname, 'start-session.html'));
 });
 //****************************************************************************************
 function generateGameID() {

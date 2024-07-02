@@ -5,18 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join a game</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../js/utility.css">
 
-    <!--Montserrat-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
     <main id="join-game-main">
         <img src="/mazeImage.png" style="width: 100px; height: 100px;" alt="maze logo" class="rotate">
         <h1 style="margin-top: 5px;">Maze War</h1>
-        <p>Join a game by typing in the ID and your username or <a href="/gamehost">host a session</a></p>
-        <form id="joinForm" method="post" action="joinGame">
+
+        <p>Join a game by typing in the code and your username or <a href="/gamehost">host a session</a></p>
+        <form id="joinForm" action="/">
+
             <div class="inputGroup">
                 <label for="gameID">Game ID</label>
                 <input type="text" id="gameID" placeholder="28234" required>
@@ -27,6 +26,7 @@
             </div>
             <button class="btn" type="submit">Join</button>
         </form>
+
     </main>
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="js/player.js" defer></script>
