@@ -15,7 +15,7 @@
         <p class="paragraph" id="user1" >Username here</p>
         <p class="paragraph" id="user3" >Username here</p>
     </div>       <main>
-        <h1>Game code - </h1>
+        <h1 id="hostGameCode">Game code - </h1>
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <h2><span id="minutes">03</span>:<span id="seconds">00</span></h2>
             <button class="btn" style="margin-bottom: 10px;" id="start-game">Start game</button>
@@ -35,7 +35,7 @@
         <p class="paragraph" id="user4" >Username here</p>
     </div>
 </body>
-<script src="host.js"></script>
+<script type="text/javascript" src="host.js" defer></script>
 <script src="./timer.js"></script>
 <script src="../js/utility.js"></script>
 <script>
@@ -43,6 +43,13 @@
         requestDeviceOrientation();
         simplePop("success", "Game starting...");
     });
+
+    (function() {
+        const hostGameCode = document.getElementById("hostGameCode");
+        const gameID = localStorage.getItem('gameID'); 
+        // alert(gameID);
+        hostGameCode.innerHTML = gameID;
+    })();
 </script>
 
 </html>

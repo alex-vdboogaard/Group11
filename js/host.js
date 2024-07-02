@@ -54,6 +54,8 @@ const simplePop = (type, message, position = "top")  => {
 }
 
 const socket = io();
+
+// for /gamehost
 const HostBtn = document.getElementById("HostBtn");
 const gameIDContainer = document.getElementById("gameIDContainer");
 const gameIDSpan = document.getElementById("gameID");
@@ -82,5 +84,7 @@ socket.on("startHosting", () => {
 HostBtn.addEventListener('click', () => {
     // start the game and host moves to a new screen
     socket.emit('startGame', document.getElementById("gameID").textContent);
+    localStorage.setItem('gameID', document.getElementById("gameID").textContent);
     window.location.href = '/host';
+    // hostGameCode.innerHTML = document.getElementById("gameID").textContent;
 });
