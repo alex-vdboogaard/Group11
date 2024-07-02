@@ -133,6 +133,7 @@ io.on('connection', (socket) => {
 
     socket.on('changeOrientation', ({ username, gameId, beta, gamma }) => {
         var player1 = { "x": 0, "y": 0 };
+        var player2 = { "x": 0, "y": 0 };
         io.to(gameId).emit('updateBalls', player1, player2);
     });
 
