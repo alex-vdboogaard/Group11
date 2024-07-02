@@ -156,26 +156,6 @@ io.on('connection', (socket) => {
     });
 });
 
-//game logic:
-const canvas = document.getElementById("myCanvas");
-const ctx = canvas.getContext("2d");
-
-ctx.beginPath();
-ctx.arc(xf, yf, 10, 0, 2 * Math.PI);
-ctx.fillStyle = "red";
-ctx.fill();
-ctx.stroke();
-
-function handleOrientation(event) {
-    let beta = event.beta
-    let gamma = event.gamma
-
-    b = beta
-    g = gamma
-
-    b = Math.min(Math.max(beta, -60), 60);
-    g = Math.min(Math.max(gamma, -60), 60);
-}
 //****************************************************************************************
 server.listen(3000, () => {
     console.log('server running at http://localhost:3000');
