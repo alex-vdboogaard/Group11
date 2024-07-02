@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Host a game</title>
+    <link rel="stylesheet" href="../js/utility.css">
+
     <link rel="stylesheet" href="styles.css">
     <style>
         @media (max-width:1000px) {
@@ -25,14 +27,7 @@
             <span id="gameID" class="gameID"></span>
         </div>
         <button class="btn" type="submit" id="HostBtn" hidden>Host</button>
-        <!-- <form id="hostGame" method="post" action="hostGame">
-            <div class="inputGroup">
-                <label for="gameID">Game ID</label>
-                <input type="text" id="gameID" placeholder="28234" required>
-                
-            </div>
-            <button class="btn" type="submit" hidden>Host</button>
-        </form> -->
+
     </main>
     <img src="/mazeImage.png" alt="maze image" class="main-img">
     <script src="/socket.io/socket.io.js"></script>

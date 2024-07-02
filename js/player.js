@@ -1,6 +1,3 @@
-// const {simplePop} = require("../js/utility");
-// import simplePop from "../js/utility"
-
 function closeAllPop() {
     document.querySelectorAll(".pop").forEach(pop => { pop.remove(); });
 }
@@ -84,11 +81,7 @@ let inappropriateUsernames = [
     "jiggaboo", "jiggerboo", "jizz", "juggs", "kike", "kinbaku", "kinkster", "kinky", "knobbing", "leather restraint",
     "leather straight jacket", "lemon party", "livesex", "lolita", "lovemaking", "make me come", "male squirting",
     "masturbate", "masturbating", "masturbation", "menage a trois", "milf", "missionary position", "mong",
-    "motherfucker", "mound of ven", "Icewallowcome", "Ice wallow come", "Mike Oxmall", "Hugh Janice", "Isaac Chris Peacock", "Isaac De Snutz",
-    "Ben Dover", "Phil McCracken", "BEST DIRTY NAMES", "piss wrinkle", "p p suck", "fuck fuck fuckin fuckin dick dick pussy ass",
-    "Philip macroch", "Duncan McCokiner", "Wilma Diqfit", "Sadie Enward", "knee grow", "Hue Janes", "Isaiah D. Enward", "Mike Oxlong", "Boo cocky",
-    "gabe itch",
-
+    "motherfucker", "mound of ven",
 ];
 
 function checkUserName(username) {
@@ -100,68 +93,6 @@ function checkUserName(username) {
 
 }
 
-
-// // const socket = io();
-
-// const joinForm = document.getElementById("joinForm");
-
-// joinForm.addEventListener("submit", (event) => {
-//     event.preventDefault();
-
-//     const username = document.getElementById("username").value;
-//     const gameID = document.getElementById("gameID").value;
-
-//     // if (checkUserName(username)) {
-//     //     socket.emit("joinGame", { username, gameID });
-
-//     //     username.value = '';
-//     //     gameID.value = '';
-//     // }
-//     // else {
-//     //     alert("Nuh uhhh")
-//     // }
-//     // socket.emit("joinGame", { username, gameID });
-
-//     var request = new XMLHttpRequest();
-//     request.open('POST', '/', true);
-
-//     var jsonData = {
-//         "username": username,
-//         "gameID": gameID
-//     };
-
-//     request.onreadystatechange = function () {
-//         if (request.readyState == 4 && request.status == 200) {
-//             var results = JSON.parse(request.responseText);
-//             console.log(results);
-
-//             if (results.Status == "Error") {
-//                 // change this to display error message using a popup
-//                 console.log(results.Message);
-//             }
-//             else {
-//                 const socket = io();
-//                 socket.emit("joinGame", { username, gameID });
-
-//                 socket.on("playerJoined", ({ username }) => {
-//                     alert(`${username} has joined the game!`);
-//                 });
-
-//                 username.value = '';
-//                 gameID.value = '';
-//             }
-//         }
-//     }
-
-//     request.setRequestHeader('Content-Type', 'application/json')
-//     request.send(JSON.stringify(jsonData));
-// });
-
-// // socket.on("playerJoined", ({ username }) => {
-// //     simplePop("success", `${username} has joined the game`)
-// // });
-
-
 const joinForm = document.getElementById("joinForm");
 
 joinForm.addEventListener("submit", (event) => {
@@ -170,38 +101,54 @@ joinForm.addEventListener("submit", (event) => {
     const username = document.getElementById("username").value;
     const gameID = document.getElementById("gameID").value;
 
-    var request = new XMLHttpRequest();
-    request.open('POST', '/', true);
 
-    var jsonData = {
-        "username": username,
-        "gameID": gameID
-    };
+    if (!checkUserName(username)) {
+        simplePop("error", `Error - inappropriate username`);
+    }
+    else {
 
-    request.onreadystatechange = function () {
-        if (request.readyState == 4 && request.status == 200) {
-            var results = JSON.parse(request.responseText);
-            console.log(results);
+        var request = new XMLHttpRequest();
+        request.open('POST','/', true);
+    
+        var jsonData = {
+            "username" : username,
+            "gameID": gameID
+        };
+    
+        request.onreadystatechange = function()
+        {
+            if (request.readyState == 4 && request.status == 200)
+            {
+                var results = JSON.parse(request.responseText);
+                console.log(results);
+    
+                if (results.Status == "Error")
+                {
+                    // change this to display error message using a popup
+                    console.log(results.Message);
+                    simplePop("error", `Error: ${results.Message}`);
+                }
+                else
+                {
+                    const socket = io();
+                    socket.emit("joinGame", { username, gameID });
+                
+                    socket.on("playerJoined", ({ username }) => {
+                        // alert(`${username} has joined the game!`);
+                        simplePop("success",`${username} has joined the game!`);
 
-            if (results.Status == "Error") {
-                // change this to display error message using a popup
-                console.log(results.Message);
-                simplePop("error", `Error: ${results.Message}`)
-            }
-            else {
-                const socket = io();
-                socket.emit("joinGame", { username, gameID });
+                    });
+    
+                    username.value = '';
+                    gameID.value = '';
+                }
 
-                socket.on("playerJoined", ({ username }) => {
-                    alert(`${username} has joined the game!`);
-                });
-
-                username.value = '';
-                gameID.value = '';
             }
         }
+    
+        request.setRequestHeader('Content-Type', 'application/json')
+        request.send(JSON.stringify(jsonData));
+
     }
 
-    request.setRequestHeader('Content-Type', 'application/json')
-    request.send(JSON.stringify(jsonData));
 });
