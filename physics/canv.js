@@ -1,5 +1,14 @@
-const canvas = document.getElementById("myCanvas");
-const ctx = canvas.getContext("2d");
+// const canvasMaze = document.getElementById("maze");
+// const ctxMaze = canvasMaze.getContext("2d");
+// const balls = canvasMaze.cloneNode();
+// const ctx = balls.getContext("2d");
+// const canvas = document.getElementById("balls");
+// const ctx = canvas.getContext("2d");
+
+const canvasMaze = document.getElementById('maze');
+const ctxMaze = canvasMaze.getContext('2d');
+const canvas = document.getElementById('balls');
+const ctx = canvas.getContext('2d');
 
 let t = 1.0;
 let speed = 1000;
@@ -22,11 +31,23 @@ let ay = 0;
 let b = 0;
 let g = 0;
 
-ctx.beginPath();
-ctx.arc(xf, yf, 10, 0, 2 * Math.PI);
-ctx.fillStyle = "red";
-ctx.fill();
-ctx.stroke();
+ctxMaze.clearRect(0, 0, canvasMaze.width, canvasMaze.height);
+ctx.clearRect(0, 0, balls.width, balls.height);
+
+
+ctxMaze.fillStyle = 'blue';
+ctxMaze.fillRect(50, 50, 100, 100);
+
+ctx.fillStyle = 'red';
+ctx.fillRect(50, 50, 50, 50);
+ctxMaze.globalCompositeOperation = 'destination-out';
+
+// ctx.globalAlpha = 1;
+// ctx.beginPath();
+// ctx.arc(xf, yf, 10, 0, 2 * Math.PI);
+// ctx.fillStyle = "red";
+// ctx.fill();
+// ctx.stroke();
 
 
 
@@ -70,19 +91,8 @@ async function requestDeviceOrientation() {
 
 
 function moving() {
+    // ctx.clearRect(0, 0, balls.width, balls.height);
 
-    // ctx.fillStyle = "white";
-    // ctx.fillRect(0, 0, 500, 500);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    // ctx.clearRect(x0 - RADIUS, y0 - RADIUS, x0 + RADIUS, y0 + RADIUS);
-    // ctx.clearRect(x0 - RADIUS, y0 - RADIUS, RADIUS * 2, RADIUS * 2);
-    // ctx.beginPath();
-    // ctx.arc(x0, y0, RADIUS, 0, 2 * Math.PI);
-    // // ctx.fillStyle = "white";
-    // ctx.fillStyle = "rgba(0, 0, 0, 1.0)";
-    // ctx.fill();
-    // ctx.strokeStyle = "white";
-    // ctx.stroke();
 
     ax = speed * Math.sin(g * Math.PI / 180);
     ay = speed * Math.sin(b * Math.PI / 180);
@@ -97,15 +107,15 @@ function moving() {
     if (xf < RADIUS) {
         xf = RADIUS;
         vfx = -vfx * bounciness;
-    } else if (xf > canvas.width - RADIUS) {
-        xf = canvas.width - RADIUS;
+    } else if (xf > balls.width - RADIUS) {
+        xf = balls.width - RADIUS;
         vfx = -vfx * bounciness;
     }
     if (yf < RADIUS) {
         yf = RADIUS;
         vfy = -vfy * bounciness;
-    } else if (yf > canvas.height - RADIUS) {
-        yf = canvas.height - RADIUS;
+    } else if (yf > balls.height - RADIUS) {
+        yf = balls.height - RADIUS;
         vfy = -vfy * bounciness;
     }
 
@@ -117,7 +127,6 @@ function moving() {
     ctx.beginPath();
     ctx.arc(xf, yf, RADIUS, 0, 2 * Math.PI);
     ctx.fillStyle = "red";
-    // ctx.fillStyle = "rgba(0, 0, 255, 1.0)";
     ctx.fill();
     ctx.strokeStyle = "black";
     ctx.stroke();
