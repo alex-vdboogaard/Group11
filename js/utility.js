@@ -20,7 +20,7 @@ function delayedRemove() {
     }, 3000);
 }
 
-function simplePop(type, message, position = "top") {
+export function simplePop(type, message, position = "top") {
     closeAllPop();
     if (type === "success") type = "pop-success";
     if (type === "error") type = "pop-error";
@@ -56,3 +56,5 @@ function simplePop(type, message, position = "top") {
 
     delayedRemove();
 }
+
+module.exports = { simplePop };
