@@ -6,6 +6,9 @@ let speed = 1000;
 let bounciness = 2 / 10;
 const RADIUS = 10;
 
+let targetx = 50;
+let targety = 50;
+
 let x0 = 250;
 let y0 = 250;
 let xf = 250;
@@ -24,6 +27,7 @@ let g = 0;
 
 ctx.beginPath();
 ctx.arc(xf, yf, 10, 0, 2 * Math.PI); //make the circle at x,y
+ctx.arc(targetx, targety, 10, 0, 2 * Math.PI);
 ctx.fillStyle = "red";
 ctx.fill();
 ctx.stroke();
@@ -91,6 +95,11 @@ function moving() {
     xf = x0 + v0x * t / 1000.0 + 0.5 * ax * (t / 1000) ** 2;
     yf = y0 + v0y * t / 1000.0 + 0.5 * ay * (t / 1000) ** 2;
 
+    if (xf >= targetx - 40 && xf <= targetx + 40) {
+        if (yf >= targety - 40 && yf <= targety + 40) {
+            alert("You win");
+        }
+    }
 
     if (xf < RADIUS) {
         xf = RADIUS;
@@ -117,9 +126,11 @@ function moving() {
     ctx.fillStyle = "red";
     // ctx.fillStyle = "rgba(0, 0, 255, 1.0)";
     ctx.fill();
+
     ctx.strokeStyle = "black";
     ctx.stroke();
-
+    ctx.arc(targety, targety, RADIUS, 0, 2 * Math.PI);
+    ctx.fill();
     console.log(vfx);
     // console.log(g); 
 }
