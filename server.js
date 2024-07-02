@@ -105,18 +105,24 @@ io.on('connection', (socket) => {
         const game = gamesInSession.find(gameObj => gameObj.gameID === gameID);
         // console.log(game.users);
         if (game) {
-            game.users.push({"username": username, "score": 0});
+            game.users.push({"username": username, "score": 0, "sockedID": socket.id});
         }
         console.log(gamesInSession);
-        // console.log(game.users);
+        console.log(game.users);
 
 
         io.to(gameID).emit('playerJoined', { username });
         console.log(`${username} joined game ${gameID}`);
     });
 
-    socket.on('disconnect', () => {
-        console.log('user disconnected');
+    socket.on('disconnecting', () => {
+        for (const room of socket.rooms) {
+            if (room !== socket.id) {
+                socket.to(room).emit("user has left", socket.id);
+                console.log(room.users);
+                console.log('user disconnected', socket.id);
+            }
+        }
     });
 });
 //****************************************************************************************
