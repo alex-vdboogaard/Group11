@@ -74,6 +74,15 @@ function moving() {
     // ctx.fillStyle = "white";
     // ctx.fillRect(0, 0, 500, 500);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // ctx.clearRect(x0 - RADIUS, y0 - RADIUS, x0 + RADIUS, y0 + RADIUS);
+    // ctx.clearRect(x0 - RADIUS, y0 - RADIUS, RADIUS * 2, RADIUS * 2);
+    // ctx.beginPath();
+    // ctx.arc(x0, y0, RADIUS, 0, 2 * Math.PI);
+    // // ctx.fillStyle = "white";
+    // ctx.fillStyle = "rgba(0, 0, 0, 1.0)";
+    // ctx.fill();
+    // ctx.strokeStyle = "white";
+    // ctx.stroke();
 
     ax = speed * Math.sin(g * Math.PI / 180);
     ay = speed * Math.sin(b * Math.PI / 180);
@@ -108,7 +117,9 @@ function moving() {
     ctx.beginPath();
     ctx.arc(xf, yf, RADIUS, 0, 2 * Math.PI);
     ctx.fillStyle = "red";
+    // ctx.fillStyle = "rgba(0, 0, 255, 1.0)";
     ctx.fill();
+    ctx.strokeStyle = "black";
     ctx.stroke();
 
     console.log(vfx);
