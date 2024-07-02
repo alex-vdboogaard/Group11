@@ -141,6 +141,10 @@ joinForm.addEventListener("submit", (event) => {
     
                     username.value = '';
                     gameID.value = '';
+
+                    socket.on('startGameForPlayers', () => {
+                        window.location.href = '/play';
+                    })
                 }
 
             }
@@ -152,8 +156,3 @@ joinForm.addEventListener("submit", (event) => {
     }
 
 });
-
-socket.on('startGameForPlayers', () => {
-    alert('here')
-    window.location.href = '/play';
-})

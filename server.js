@@ -145,7 +145,6 @@ io.on('connection', (socket) => {
     });
 
     socket.on('startGame', (gameID) => {
-        console.log("START GAME", gameID);
         io.to(gameID).emit('startGameForPlayers');
     })
 
