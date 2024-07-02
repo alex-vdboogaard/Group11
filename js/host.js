@@ -72,9 +72,15 @@ socket.on("playerJoined", ({ username }) => {
     simplePop("success",`${username} has joined your game!`);
 });
 
-socket.on("startGame", () => {
+socket.on("startHosting", () => {
     // add logic here - like making a start game button visible
     // alert('The game may start');
     simplePop("success",`The game may start`);
     HostBtn.style.display = "block";
+});
+
+HostBtn.addEventListener('click', () => {
+    // start the game and host moves to a new screen
+    socket.emit('startGame', document.getElementById("gameID").textContent);
+    window.location.href = '/host';
 });

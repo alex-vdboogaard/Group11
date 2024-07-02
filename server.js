@@ -43,6 +43,10 @@ app.get('/', (req, res) => {
     res.sendFile(join(__dirname, 'index.html'));
 });
 //****************************************************************************************
+app.get('/play', (req, res) => {
+    res.sendFile(join(__dirname, '../Group11/physics/user.html'));
+});
+//****************************************************************************************
 app.post('/', (req, res) => {
 
     const game = gamesInSession.find(gameObj => gameObj.gameID === req.body.gameID);
@@ -81,6 +85,10 @@ app.post('/', (req, res) => {
 //****************************************************************************************
 app.get('/gamehost', (req, res) => {
     res.sendFile(join(__dirname, 'start-session.html'));
+});
+//****************************************************************************************
+app.get('/host', (req, res) => {
+    res.sendFile(join(__dirname, '../Group11/physics/host.html'));
 });
 //****************************************************************************************
 function generateGameID() {
@@ -126,7 +134,7 @@ io.on('connection', (socket) => {
         console.log(`${username} joined game ${gameID}`);
 
         if (game.users.length >= 2 && game.users.length <= 4) {
-            io.to(gameID).emit('startGame');
+            io.to(gameID).emit('startHosting');
         }
     });
 
@@ -136,10 +144,15 @@ io.on('connection', (socket) => {
         io.to(gameId).emit('updateBalls', player1, player2);
     });
 
+    socket.on('startGame', (gameID) => {
+        console.log("START GAME", gameID);
+        io.to(gameID).emit('startGameForPlayers');
+    })
+
     socket.on('disconnecting', () => {
         for (const room of socket.rooms) {
             if (room !== socket.id) {
-                socket.to(room).emit("user has left", socket.id);
+                // io.to(room).emit("user has left", socket.id);
 
                 const game = gamesInSession.find(gameObj => gameObj.gameID == room);
 

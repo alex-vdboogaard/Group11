@@ -152,3 +152,8 @@ joinForm.addEventListener("submit", (event) => {
     }
 
 });
+
+socket.on('startGameForPlayers', () => {
+    alert('here')
+    window.location.href = '/play';
+})
