@@ -11,7 +11,7 @@
         <img src="/mazeImage.png" style="width: 100px; height: 100px;" alt="maze logo" class="rotate">
         <h1 style="margin-top: 5px;">Maze War</h1>
         <p>Join a game by typing in the code and your username or <a href="/gamehost">host a session</a></p>
-        <form id="joinForm">
+        <form id="joinForm" action="/">
             <div class="inputGroup">
                 <label for="gameID">Game ID</label>
                 <input type="text" id="gameID" placeholder="28234" required>
@@ -23,11 +23,11 @@
             <button class="btn" type="submit">Join</button>
         </form>
 
-        <form id="joinForm">
+        <!-- <form id="joinForm" action="/">
             <input type="text" id="username" placeholder="Username" required>
             <input type="text" id="gameID" placeholder="Game ID" required>
             <button type="submit">Join</button>
-        </form>
+        </form> -->
     </main>
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="js/player.js" defer></script>
