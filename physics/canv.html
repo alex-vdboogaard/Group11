@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="canv.css">
+
     <title>Overlay Canvases</title>
 </head>
 
@@ -13,14 +13,20 @@
 
     <button onclick="requestDeviceOrientation()">Start</button>
 
-    <!-- <canvas id="maze" width="500" height="500" style="border:1px solid #000000;">
-        Sorry, your browser does not support canvas.
-    </canvas> -->
+    <canvas id="maze" width="500" height="500"
+        style="border:1px solid #000000; position: absolute; top: 100px; left: 100px;">
+    </canvas>
 
-    <div class="canvas-container">
+    <div id="ball"
+        style="background-color:transparent; border: none; position:absolute; width:20px; height:20px; top:100px; left:100px;">
+        <canvas id="ball1" width="20" height="20" style="border:none ; position: absolute; top: 0px; left: 0px;">
+        </canvas>
+    </div>
+
+    <!-- <div class="canvas-container">
         <canvas id="maze" class="canvas" width="500" height="500"></canvas>
         <canvas id="balls" class="canvas" width="500" height="500"></canvas>
-    </div>
+    </div> -->
 
 
     <script src="canv.js"></script>
