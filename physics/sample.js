@@ -577,6 +577,11 @@ function rand(max) {
     difficulty = e.options[e.selectedIndex].value;
     cellSize = mazeCanvas.width / difficulty;
     maze = new Maze(difficulty, difficulty);
+
+    // for (let i = 0; i < maze.map().length; i++){
+    //   console.log(maze.map()[i])
+    // }
+
     draw = new DrawMaze(maze, ctx, cellSize, finishSprite);
     player = new Player(maze, mazeCanvas, cellSize, displayVictoryMess, sprite);
     if (document.getElementById("mazeContainer").style.opacity < "100") {
