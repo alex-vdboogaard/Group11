@@ -97,22 +97,22 @@ io.on('connection', (socket) => {
     // allow players to join a game based on gameID
     socket.on('joinGame', ({ username, gameID }) => {
         socket.join(gameID);
-        // console.log(users);
-        // users.set(username, socket.id);
-        // console.log(users);
 
         console.log(gamesInSession);
         const game = gamesInSession.find(gameObj => gameObj.gameID === gameID);
-        // console.log(game.users);
         if (game) {
             game.users.push({"username": username, "score": 0, "socketID": socket.id});
         }
         console.log(gamesInSession);
         console.log(game.users);
 
-
         io.to(gameID).emit('playerJoined', { username });
         console.log(`${username} joined game ${gameID}`);
+
+        if (game.users.length >=2 && game.users.length <= 4)
+        {
+            io.to(gameID).emit('startGame');
+        }
     });
 
     socket.on('disconnecting', () => {
