@@ -8,6 +8,27 @@ const server = createServer(app);
 const io = new Server(server);
 //****************************************************************************************
 // global variables
+let t = 1.0;
+let speed = 1000;
+let bounciness = 2 / 10;
+const RADIUS = 10;
+
+let x0 = 250;
+let y0 = 250;
+let xf = 250;
+let yf = 250;
+
+let v0x = 0;
+let v0y = 0;
+let vfx = 0;
+let vfy = 0;
+
+let ax = 0;
+let ay = 0;
+
+let b = 0;
+let g = 0;
+
 
 // arr of all active sessions' gameIDs stored in an array
 var gamesInSession = [];
@@ -134,6 +155,27 @@ io.on('connection', (socket) => {
         }
     });
 });
+
+//game logic:
+const canvas = document.getElementById("myCanvas");
+const ctx = canvas.getContext("2d");
+
+ctx.beginPath();
+ctx.arc(xf, yf, 10, 0, 2 * Math.PI);
+ctx.fillStyle = "red";
+ctx.fill();
+ctx.stroke();
+
+function handleOrientation(event) {
+    let beta = event.beta
+    let gamma = event.gamma
+
+    b = beta
+    g = gamma
+
+    b = Math.min(Math.max(beta, -60), 60);
+    g = Math.min(Math.max(gamma, -60), 60);
+}
 //****************************************************************************************
 server.listen(3000, () => {
     console.log('server running at http://localhost:3000');

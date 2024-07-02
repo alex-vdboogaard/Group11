@@ -56,7 +56,6 @@ const simplePop = (type, message, position = "top") => {
     delayedRemove();
 }
 
-
 let inappropriateUsernames = [
     "admin", "root", "123456", "password", "12345", "2g1c", "2 girls 1 cup", "acrotomophilia",
     "alabama hot pocket", "alaskan pipeline", "anal", "anilingus", "anus", "apeshit", "arsehole",

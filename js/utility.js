@@ -1,7 +1,3 @@
-function closePop(element) {
-    element.parentNode.remove();
-}
-
 function closeAllPop() {
     document.querySelectorAll(".pop").forEach(pop => { pop.remove(); });
 }
@@ -20,7 +16,7 @@ function delayedRemove() {
     }, 3000);
 }
 
-export function simplePop(type, message, position = "top") {
+function simplePop(type, message, position = "top") {
     closeAllPop();
     if (type === "success") type = "pop-success";
     if (type === "error") type = "pop-error";
@@ -56,5 +52,3 @@ export function simplePop(type, message, position = "top") {
 
     delayedRemove();
 }
-
-module.exports = { simplePop };

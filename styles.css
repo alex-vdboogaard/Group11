@@ -3,6 +3,7 @@
 * {
     font-family: 'Poppins';
 }
+
 :root {
     --mainBlue: #4931A8;
 }
@@ -78,7 +79,7 @@ h1 {
     margin-bottom: 0px;
 }
 
-p {
+.paragraph {
     margin-top: 5px;
     font-size: 25px;
     color: #414141;
@@ -150,4 +151,8 @@ a:hover {
 
 .gameID {
     color: var(--mainBlue);
+}
+
+#canvas-wrapper {
+    position: relative;
 }

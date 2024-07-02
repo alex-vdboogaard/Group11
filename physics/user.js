@@ -1,8 +1,5 @@
-const canvas1 = document.getElementById("background");
-const ctx = canvas1.getContext("2d");
-
-const canvas2 = document.getElementById("balls");
-const ctx2 = canvas2.getContext("2d");
+const canvas = document.getElementById("myCanvas");
+const ctx = canvas.getContext("2d");
 
 let t = 1.0;
 let speed = 1000;
@@ -26,14 +23,10 @@ let b = 0;
 let g = 0;
 
 ctx.beginPath();
+ctx.arc(xf, yf, 10, 0, 2 * Math.PI); //make the circle at x,y
+ctx.fillStyle = "red";
 ctx.fill();
 ctx.stroke();
-
-ctx2.beginPath();
-ctx2.arc(xf, yf, 10, 0, 2 * Math.PI); //make the circle at x,y
-ctx2.fillStyle = "red";
-ctx2.fill();
-ctx2.stroke();
 
 
 
