@@ -5,10 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Host a game</title>
     <link rel="stylesheet" href="styles.css">
-
-    <!--Montserrat-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <style>
         @media (max-width:1000px) {
             .main-img {
@@ -23,16 +19,23 @@
         <img class="rotate" src="/mazeImage.png" width="50px" height="30px">
         <h1>Maze War</h1>
         <p>Host a game by clicking below or <a href="/index.html">join a game</a></p>
-        <form id="hostGame" method="post" action="hostGame">
+        
+        <div id="gameIDContainer" class="gameIDcontainer">
+            GameID:
+            <span id="gameID" class="gameID"></span>
+        </div>
+        <button class="btn" type="submit" id="HostBtn" hidden>Host</button>
+        <!-- <form id="hostGame" method="post" action="hostGame">
             <div class="inputGroup">
                 <label for="gameID">Game ID</label>
                 <input type="text" id="gameID" placeholder="28234" required>
+                
             </div>
-            <button class="btn" type="submit">Host</button>
-        </form>
+            <button class="btn" type="submit" hidden>Host</button>
+        </form> -->
     </main>
     <img src="/mazeImage.png" alt="maze image" class="main-img">
     <script src="/socket.io/socket.io.js"></script>
-    <script type="text/javascript" src="js/player.js" defer></script>
+    <script type="text/javascript" src="js/host.js" defer></script>
 </body>
 </html>
