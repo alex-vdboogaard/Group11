@@ -10,24 +10,29 @@
 </head>
 <body style="display: flex; align-items: center;">
     <div class="score">
-        <p id="score-1">0</p>
-        <p id="user1" >Username here</p>
-        <p id="user3" >Username here</p>
-    </div>    <main>
+        <img src="../red-ball.jpg" style="width: 50px; height: 100%"/>
+        <p class="paragraph" id="score-1">0</p>
+        <p class="paragraph" id="user1" >Username here</p>
+        <p class="paragraph" id="user3" >Username here</p>
+    </div>       <main>
         <h1>Game code - </h1>
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <h2><span id="minutes">03</span>:<span id="seconds">00</span></h2>
             <button class="btn" style="margin-bottom: 10px;" id="start-game">Start game</button>
             <button class="btn" style="margin-bottom: 10px;" id="reset-game" hidden >Reset game</button>
         </div>   
-        <canvas id="myCanvas" width="500" height="500" style="border:1px solid #000000;">
+        <div id="canvas-wrapper">
+            <canvas id="balls" width="500" height="500" style="border:1px solid #000000;">
+            <canvas id="background" width="500" height="500" style="border:1px solid #000000;">
+        </div>
         Sorry, your browser does not support canvas.
         </canvas>
     </main>
     <div class="score">
-        <p id="score-2">0</p>
-        <p id="user2" >Username here</p>
-        <p id="user4" >Username here</p>
+        <img src="../blue-ball.png" style="width: 50px; height: 100%"/>
+        <p class="paragraph" id="score-2">0</p>
+        <p class="paragraph" id="user2" >Username here</p>
+        <p class="paragraph" id="user4" >Username here</p>
     </div>
 </body>
 <script src="host.js"></script>

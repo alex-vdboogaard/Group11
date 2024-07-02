@@ -16,7 +16,7 @@ function delayedRemove() {
     }, 3000);
 }
 
-const simplePop = (type, message, position = "top")  => {
+const simplePop = (type, message, position = "top") => {
     closeAllPop();
     if (type === "success") type = "pop-success";
     if (type === "error") type = "pop-error";
@@ -97,9 +97,10 @@ const joinForm = document.getElementById("joinForm");
 
 joinForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    
+
     const username = document.getElementById("username").value;
     const gameID = document.getElementById("gameID").value;
+
 
     if (!checkUserName(username)) {
         simplePop("error", `Error - inappropriate username`);
@@ -141,6 +142,7 @@ joinForm.addEventListener("submit", (event) => {
                     username.value = '';
                     gameID.value = '';
                 }
+
             }
         }
     
