@@ -15,5 +15,10 @@ socket.on("gameCreated", ({ gameID }) => {
 });
 
 socket.on("playerJoined", ({ username }) => {
-    alert(`${username} has joined your game!`);
+    // alert(`${username} has joined your game!`);
 });
+
+socket.on("startGame", () => {
+    // add logic here - like making a start game button visible
+    alert('The game may start');
+})
