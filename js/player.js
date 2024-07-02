@@ -19,7 +19,7 @@ function delayedRemove() {
     }, 3000);
 }
 
-const simplePop = (type, message, position = "top")  => {
+const simplePop = (type, message, position = "top") => {
     closeAllPop();
     if (type === "success") type = "pop-success";
     if (type === "error") type = "pop-error";
@@ -167,36 +167,32 @@ const joinForm = document.getElementById("joinForm");
 
 joinForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    
+
     const username = document.getElementById("username").value;
     const gameID = document.getElementById("gameID").value;
 
     var request = new XMLHttpRequest();
-    request.open('POST','/', true);
+    request.open('POST', '/', true);
 
     var jsonData = {
-        "username" : username,
+        "username": username,
         "gameID": gameID
     };
 
-    request.onreadystatechange = function()
-    {
-        if (request.readyState == 4 && request.status == 200)
-        {
+    request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
             var results = JSON.parse(request.responseText);
             console.log(results);
 
-            if (results.Status == "Error")
-            {
+            if (results.Status == "Error") {
                 // change this to display error message using a popup
                 console.log(results.Message);
                 simplePop("error", `Error: ${results.Message}`)
             }
-            else
-            {
+            else {
                 const socket = io();
                 socket.emit("joinGame", { username, gameID });
-            
+
                 socket.on("playerJoined", ({ username }) => {
                     alert(`${username} has joined the game!`);
                 });

@@ -1,7 +1,7 @@
 const canvas = document.getElementById("myCanvas");
 const ctx = canvas.getContext("2d");
 
-let motion = [250,250, 0,0, 0,0]
+let motion = [250, 250, 0, 0, 0, 0]
 
 ctx.beginPath();
 ctx.arc(motion[0], motion[1], 10, 0, 2 * Math.PI);
@@ -30,14 +30,14 @@ async function requestDeviceOrientation() {
     if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
         //iOS 13+ devices
         try {
-        const permissionState = await DeviceOrientationEvent.requestPermission()
-        if (permissionState === 'granted') {
-            window.addEventListener('deviceorientation', handleOrientation)
-        } else {
-            alert('Permission was denied')
-        }
+            const permissionState = await DeviceOrientationEvent.requestPermission()
+            if (permissionState === 'granted') {
+                window.addEventListener('deviceorientation', handleOrientation)
+            } else {
+                alert('Permission was denied')
+            }
         } catch (error) {
-        alert(error)
+            alert(error)
         }
     } else if ('DeviceOrientationEvent' in window) {
         //non iOS 13+ devices
@@ -53,9 +53,9 @@ async function requestDeviceOrientation() {
 
 
 function moving() {
-    
+
     ctx.fillStyle = "white";
-    ctx.fillRect(0,0, 500,500);
+    ctx.fillRect(0, 0, 500, 500);
 
     motion[2] += motion[4];
     motion[3] += motion[5];

@@ -10,7 +10,7 @@ const io = new Server(server);
 // global variables
 
 // arr of all active sessions' gameIDs stored in an array
-var gamesInSession = []; 
+var gamesInSession = [];
 
 //****************************************************************************************
 //middleware
@@ -27,40 +27,35 @@ app.post('/', (req, res) => {
     console.log("POSSTTTTTT");
     const game = gamesInSession.find(gameObj => gameObj.gameID === req.body.gameID);
 
-    if (!req.body.username)
-    {
+    if (!req.body.username) {
         //Errormessage
-        res.json({"Status" : "Error", "Message" : "You have to put in a username"});
+        res.json({ "Status": "Error", "Message": "You have to put in a username" });
         return;
     }
-    else if (!gamesInSession.some(game => game.gameID === req.body.gameID))
-    {
+    else if (!gamesInSession.some(game => game.gameID === req.body.gameID)) {
         //Errormessage
-        res.json({"Status" : "Error", "Message" : "You have to enter a valid gameID"});
+        res.json({ "Status": "Error", "Message": "You have to enter a valid gameID" });
         return;
     }
-    else if (!req.body.gameID)
-    {
+    else if (!req.body.gameID) {
         //Errormessage
-        res.json({"Status" : "Error", "Message" : "You have to put in a gameID"});
+        res.json({ "Status": "Error", "Message": "You have to put in a gameID" });
         return;
     }
-    else if (game && game.users.some(user => user.username === req.body.username))
-    {
+    else if (game && game.users.some(user => user.username === req.body.username)) {
         //Errormessage
-        res.json({"Status" : "Error", "Message" : "Username already exists"});
+        res.json({ "Status": "Error", "Message": "Username already exists" });
         return;
     }
-    else if (game && game.users.length >= 4)
-    {
+    else if (game && game.users.length >= 4) {
         //Errormessage
-        res.json({"Status" : "Error", "Message" : "This game is already full."});
+        res.json({ "Status": "Error", "Message": "This game is already full." });
         return;
     }
 
     // add some additional checking here
 
-    res.json({"Status" : "Success"});
+    res.json({ "Status": "Success" });
     return;
 });
 //****************************************************************************************
@@ -69,13 +64,13 @@ app.get('/gamehost', (req, res) => {
 });
 //****************************************************************************************
 function generateGameID() {
-    var charactersToChooseFrom ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersToChooseFrom = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var result = "";
     const charactersLength = charactersToChooseFrom.length;
-    for ( let i = 0; i < 5; i++ ) {
+    for (let i = 0; i < 5; i++) {
         result += charactersToChooseFrom.charAt(Math.floor(Math.random() * charactersLength));
     }
-  
+
     return result;
 }
 //****************************************************************************************
@@ -88,10 +83,10 @@ io.on('connection', (socket) => {
         const gameID = generateGameID();
         console.log('created a game');
         socket.join(gameID);
-        socket.emit('gameCreated', {gameID});
+        socket.emit('gameCreated', { gameID });
         console.log('Game created with a id of: ', gameID);
         console.log(gamesInSession);
-        gamesInSession.push({"gameID": gameID, "users": [], "round": 0});
+        gamesInSession.push({ "gameID": gameID, "users": [], "round": 0 });
         console.log(gamesInSession);
     });
 
@@ -102,7 +97,7 @@ io.on('connection', (socket) => {
         console.log(gamesInSession);
         const game = gamesInSession.find(gameObj => gameObj.gameID === gameID);
         if (game) {
-            game.users.push({"username": username, "score": 0, "socketID": socket.id});
+            game.users.push({ "username": username, "score": 0, "socketID": socket.id, "orientation": { "beta": 0, "gamma": 0 } });
         }
         console.log(gamesInSession);
         console.log(game.users);
@@ -110,10 +105,14 @@ io.on('connection', (socket) => {
         io.to(gameID).emit('playerJoined', { username });
         console.log(`${username} joined game ${gameID}`);
 
-        if (game.users.length >=2 && game.users.length <= 4)
-        {
+        if (game.users.length >= 2 && game.users.length <= 4) {
             io.to(gameID).emit('startGame');
         }
+    });
+
+    socket.on('changeOrientation', ({ username, gameId, beta, gamma }) => {
+        var player1 = { "x": 0, "y": 0 };
+        io.to(gameId).emit('updateBalls', player1, player2);
     });
 
     socket.on('disconnecting', () => {
@@ -137,6 +136,6 @@ io.on('connection', (socket) => {
 });
 //****************************************************************************************
 server.listen(3000, () => {
-  console.log('server running at http://localhost:3000');
+    console.log('server running at http://localhost:3000');
 });
 //****************************************************************************************
