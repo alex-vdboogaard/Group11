@@ -26,6 +26,12 @@ main {
     transition: all 0.4s linear;
     margin-top: 15px;
     width: 100%;
+
+    /*background-image: -moz-linear-gradient(180deg, black 0%, #b366ff 50%, black 100%);
+	background-image: -webkit-linear-gradient(180deg, black 0%, #b366ff 50%, black 100%);
+	background-image: -o-linear-gradient(180deg, black 0%, #b366ff 50%, black 100%);
+	background-image: linear-gradient(180deg, black 0%, #b366ff 50%, black 100%);
+    */
 }
 
 .btn:hover {
@@ -51,6 +57,7 @@ input {
 
 
 h1 {
+    text-align: center;
     font-size: 70px;
     font-weight: 500;
     margin-bottom: 0px;
@@ -66,4 +73,52 @@ p {
 img {
     max-width: 50%;
     height: 100vh;
+}
+
+.rotate {       
+    display: block;    
+    width: 150px;
+    height: 150px;  
+    margin-right: auto;
+    margin-left: auto;
+    /*transition: transform 1s; 
+    -webkit-transition: -webkit-transform 1s;*/
+    animation: rotating 10s linear infinite;
+    -webkit-animation: rotating 10s linear infinite;
+    -moz-animation: rotating 10s linear infinite;
+
+}
+
+/*.rotate:hover {
+    transform: rotate(360deg) translateZ(0);
+   -webkit-transform: rotate(360deg) translateZ(0);    
+}*/
+
+@keyframes rotating {
+    from {
+      transform: rotate(0deg);
+    }
+    
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+@-webkit-keyframes rotating{
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+@-moz-keyframes rotating{
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
