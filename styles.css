@@ -50,9 +50,25 @@ main {
 }
 
 input {
+    border: 2px solid gray;
     padding: 10px 20px;
-    border: 1px solid grey;
+    font-size: 16px;
+    outline: none;
+    border-radius: 0;
+    background-color: white;
+    color: black;
+    box-shadow: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    transition: border-color 0.3s ease;
 }
+
+/* Border color change on focus */
+input:focus {
+    border-color: var(--mainBlue);
+}
+
 
 
 h1 {
@@ -86,6 +102,16 @@ p {
     -webkit-animation: rotating 10s linear infinite;
     -moz-animation: rotating 10s linear infinite;
 
+}
+
+a {
+    color: var(--mainBlue);
+    text-decoration: none;
+    transition: all 0.4s linear;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 @keyframes rotating {

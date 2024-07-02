@@ -85,7 +85,11 @@ let inappropriateUsernames = [
     "jiggaboo", "jiggerboo", "jizz", "juggs", "kike", "kinbaku", "kinkster", "kinky", "knobbing", "leather restraint",
     "leather straight jacket", "lemon party", "livesex", "lolita", "lovemaking", "make me come", "male squirting",
     "masturbate", "masturbating", "masturbation", "menage a trois", "milf", "missionary position", "mong",
-    "motherfucker", "mound of ven",
+    "motherfucker", "mound of ven", "Icewallowcome", "Ice wallow come", "Mike Oxmall", "Hugh Janice", "Isaac Chris Peacock", "Isaac De Snutz",
+    "Ben Dover", "Phil McCracken", "BEST DIRTY NAMES", "piss wrinkle", "p p suck", "fuck fuck fuckin fuckin dick dick pussy ass",
+    "Philip macroch", "Duncan McCokiner", "Wilma Diqfit", "Sadie Enward", "knee grow", "Hue Janes", "Isaiah D. Enward", "Mike Oxlong", "Boo cocky",
+    "gabe itch",
+
 ];
 
 function checkUserName(username) {
@@ -96,6 +100,7 @@ function checkUserName(username) {
     }
 
 }
+
 
 // // const socket = io();
 
@@ -156,6 +161,7 @@ function checkUserName(username) {
 // // socket.on("playerJoined", ({ username }) => {
 // //     simplePop("success", `${username} has joined the game`)
 // // });
+
 
 const joinForm = document.getElementById("joinForm");
 
