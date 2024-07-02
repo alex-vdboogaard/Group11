@@ -7,8 +7,6 @@ body {
 }
 
 main {
-    width: 100vw;
-    height: 100vh;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -70,15 +68,15 @@ p {
     max-width: 500px;
 }
 
-img {
+.main-img {
     max-width: 50%;
     height: 100vh;
 }
 
-.rotate {       
-    display: block;    
+.rotate {
+    display: block;
     width: 150px;
-    height: 150px;  
+    height: 150px;
     margin-right: auto;
     margin-left: auto;
     /*transition: transform 1s; 
@@ -89,22 +87,7 @@ img {
 
 }
 
-/*.rotate:hover {
-    transform: rotate(360deg) translateZ(0);
-   -webkit-transform: rotate(360deg) translateZ(0);    
-}*/
-
 @keyframes rotating {
-    from {
-      transform: rotate(0deg);
-    }
-    
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-@-webkit-keyframes rotating{
     from {
         transform: rotate(0deg);
     }
@@ -113,7 +96,18 @@ img {
         transform: rotate(360deg);
     }
 }
-@-moz-keyframes rotating{
+
+@-webkit-keyframes rotating {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes rotating {
     from {
         transform: rotate(0deg);
     }
