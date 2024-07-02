@@ -24,7 +24,6 @@ app.get('/', (req, res) => {
 //****************************************************************************************
 app.post('/', (req, res) => {
 
-    console.log("POSSTTTTTT");
     const game = gamesInSession.find(gameObj => gameObj.gameID === req.body.gameID);
 
     if (!req.body.username)
