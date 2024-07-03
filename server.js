@@ -166,6 +166,10 @@ io.on('connection', (socket) => {
         game.round += 1;
         io.to(gameID).emit('resetGame', (game))
     })
+    socket.on("updateHost", ({ ctx }) => {
+        socket.emit("receiveUpdate", ({ ctx }));
+    });
+
 
     socket.on('disconnecting', () => {
         for (const room of socket.rooms) {
