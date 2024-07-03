@@ -6,7 +6,8 @@
 // const ctx = canvas.getContext("2d");
 
 
-//const socket = io();
+const socket = io();
+let intervalID;
 
 const canvasMaze = document.getElementById('maze');
 const ctxMaze = canvasMaze.getContext('2d');
@@ -423,12 +424,15 @@ function moving() {
 
     if ((targetx < xf && xf < targetx + cellSize) && (targety < yf && yf < targety + cellSize)) {
         window.alert("Won");
+        socket.emit('Won', document.getElementById("gameID").value);
+        clearInterval(intervalID);
+        return;
     }
 
     // console.log(g); 
 }
 
-setInterval(moving, t);
+intervalID = setInterval(moving, t);
 
 //moving()
 
@@ -728,13 +732,13 @@ joinForm.addEventListener("submit", (event) => {
                     simplePop("error", `Error: ${results.Message}`);
                 }
                 else {
-                    const socket = io();
+                    // const socket = io();
                     socket.emit("joinGame", { username, gameID });
 
                     socket.on("playerJoined", ({ username }) => {
                         // alert(`${username} has joined the game!`);
                         simplePop("success", `${username} has joined the game!`);
-
+                        document.getElementById('joinbtn').style.display = 'none';
                     });
 
                     username.value = '';

@@ -32,6 +32,7 @@
 <script src="../js/utility.js"></script>
 <script>
     simplePop("success", "Game starting...");
+    const socket = io();
     (function () {
         const hostGameCode = document.getElementById("hostGameCode");
         const gameID = localStorage.getItem('gameID');
@@ -41,7 +42,16 @@
         hostGameCode.innerHTML = `Maze War! - ${gameID}`;
         document.querySelector("#user1").innerHTML = user1;
         document.querySelector("#user2").innerHTML = user2;
+
+
+        socket.emit('hostConnected', gameID);
+
+        
     })();
+
+    socket.on('winner', () => {
+        simplePop("success", "There was a winner");
+    })
 </script>
 
 </html>
