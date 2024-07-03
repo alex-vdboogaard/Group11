@@ -139,7 +139,9 @@ joinForm.addEventListener("submit", (event) => {
                     gameID.value = '';
 
                     socket.on('startGameForPlayers', () => {
-                        window.location.href = '/play';
+                        // window.location.href = '/play';
+                        document.getElementById("map").style.display = 'block';
+                        document.getElementById("join-game-main").style.display = 'none';
                     })
 
                     //receive updatedd ball positions:
