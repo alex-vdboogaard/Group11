@@ -82,15 +82,7 @@ socket.on("playerJoined", ({ username }) => {
     }
 });
 
-socket.on("receiveUpdate", ({ ctx }) => {
-    document.querySelectorAll("canvas").remove();
-    document.querySelector("main").appendChild(ctx);
-})
-
 socket.on("startHosting", () => {
-    // add logic here - like making a start game button visible
-    // alert('The game may start');
-    simplePop("success", `The game may start`);
     HostBtn.style.display = "block";
 });
 
@@ -104,9 +96,7 @@ HostBtn.addEventListener('click', () => {
     // hostGameCode.innerHTML = document.getElementById("gameID").textContent;
 });
 
-//receive updated positions of balls:
-socket.on("updateBalls", ({ player1 }) => {
-    const player1Ball = document.querySelector("#ball1");
-    player1Ball.left = player1.x;
-    player1Ball.top = player1.y;
+socket.on("roundEndHost", () => {
+    simplePop("success", "A player won! Maze restarting");
+    alert("end");
 })
