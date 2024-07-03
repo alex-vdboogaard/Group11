@@ -108,48 +108,51 @@ joinForm.addEventListener("submit", (event) => {
     else {
 
         var request = new XMLHttpRequest();
-        request.open('POST','/', true);
-    
+        request.open('POST', '/', true);
+
         var jsonData = {
-            "username" : username,
+            "username": username,
             "gameID": gameID
         };
-    
-        request.onreadystatechange = function()
-        {
-            if (request.readyState == 4 && request.status == 200)
-            {
+
+        request.onreadystatechange = function () {
+            if (request.readyState == 4 && request.status == 200) {
                 var results = JSON.parse(request.responseText);
                 console.log(results);
-    
-                if (results.Status == "Error")
-                {
+
+                if (results.Status == "Error") {
                     // change this to display error message using a popup
                     console.log(results.Message);
                     simplePop("error", `Error: ${results.Message}`);
                 }
-                else
-                {
+                else {
                     const socket = io();
                     socket.emit("joinGame", { username, gameID });
-                
+
                     socket.on("playerJoined", ({ username }) => {
                         // alert(`${username} has joined the game!`);
-                        simplePop("success",`${username} has joined the game!`);
+                        simplePop("success", `${username} has joined the game!`);
 
                     });
-    
+
                     username.value = '';
                     gameID.value = '';
 
                     socket.on('startGameForPlayers', () => {
                         window.location.href = '/play';
                     })
+
+                    //receive updatedd ball positions:
+                    socket.on("updateBalls", ({ player1 }) => {
+                        const player1Ball = document.querySelector("#ball1");
+                        player1Ball.style.left = player1.x;
+                        player1Ball.style.top = player1.y;
+                    })
                 }
 
             }
         }
-    
+
         request.setRequestHeader('Content-Type', 'application/json')
         request.send(JSON.stringify(jsonData));
 

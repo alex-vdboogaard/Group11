@@ -16,7 +16,7 @@ function delayedRemove() {
     }, 3000);
 }
 
-const simplePop = (type, message, position = "top")  => {
+const simplePop = (type, message, position = "top") => {
     closeAllPop();
     if (type === "success") type = "pop-success";
     if (type === "error") type = "pop-error";
@@ -61,23 +61,23 @@ const gameIDContainer = document.getElementById("gameIDContainer");
 const gameIDSpan = document.getElementById("gameID");
 
 // on the initial render of the page....
-(function() {
+(function () {
     socket.emit("createGame");
 })();
 
 socket.on("gameCreated", ({ gameID }) => {
-    gameIDSpan.textContent = gameID;    
+    gameIDSpan.textContent = gameID;
 });
 
 socket.on("playerJoined", ({ username }) => {
     // alert(`${username} has joined your game!`);
-    simplePop("success",`${username} has joined your game!`);
+    simplePop("success", `${username} has joined your game!`);
 });
 
 socket.on("startHosting", () => {
     // add logic here - like making a start game button visible
     // alert('The game may start');
-    simplePop("success",`The game may start`);
+    simplePop("success", `The game may start`);
     HostBtn.style.display = "block";
 });
 
@@ -88,3 +88,10 @@ HostBtn.addEventListener('click', () => {
     window.location.href = '/host';
     // hostGameCode.innerHTML = document.getElementById("gameID").textContent;
 });
+
+//receive updated positions of balls:
+socket.on("updateBalls", ({ player1 }) => {
+    const player1Ball = document.querySelector("#ball1");
+    player1Ball.left = player1.x;
+    player1Ball.top = player1.y;
+})
