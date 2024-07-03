@@ -658,7 +658,7 @@ function moving() {
         window.alert("Won");
         simplePop('success', 'Won');
 
-        socket.emit('roundEnd', {});
+        socket.emit('roundEnd');
     }
 
 

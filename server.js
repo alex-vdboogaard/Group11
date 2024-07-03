@@ -166,9 +166,6 @@ io.on('connection', (socket) => {
         socket.emit('roundEndHost');
         socket.emit("roundEndPlayers");
     })
-    socket.on("updateHost", ({ ctx }) => {
-        socket.emit("receiveUpdate", ({ ctx }));
-    });
 
 
     socket.on('disconnecting', () => {

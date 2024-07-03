@@ -143,13 +143,6 @@ joinForm.addEventListener("submit", (event) => {
                         document.getElementById("map").style.display = 'block';
                         document.getElementById("join-game-main").style.display = 'none';
                     })
-
-                    //receive updatedd ball positions:
-                    socket.on("updateBalls", ({ player1 }) => {
-                        const player1Ball = document.querySelector("#ball1");
-                        player1Ball.style.left = player1.x;
-                        player1Ball.style.top = player1.y;
-                    })
                 }
 
             }

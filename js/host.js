@@ -98,5 +98,4 @@ HostBtn.addEventListener('click', () => {
 
 socket.on("roundEndHost", () => {
     simplePop("success", "A player won! Maze restarting");
-    alert("end");
-})
+});
