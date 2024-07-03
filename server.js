@@ -44,7 +44,7 @@ app.get('/', (req, res) => {
 });
 //****************************************************************************************
 app.get('/play', (req, res) => {
-    res.sendFile(join(__dirname, '../Group11/physics/user.html'));
+    res.sendFile(join(__dirname, './physics/user.html'));
 });
 //****************************************************************************************
 app.post('/', (req, res) => {
@@ -88,7 +88,7 @@ app.get('/gamehost', (req, res) => {
 });
 //****************************************************************************************
 app.get('/host', (req, res) => {
-    res.sendFile(join(__dirname, '../Group11/physics/host.html'));
+    res.sendFile(join(__dirname, './physics/host.html'));
 });
 //****************************************************************************************
 function generateGameID() {
