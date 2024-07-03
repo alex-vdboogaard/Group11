@@ -1,5 +1,6 @@
-const canvasMaze = document.getElementById('maze');
-const ctxMaze = canvasMaze.getContext('2d');
+// const canvasMaze = document.getElementById('maze');
+// const ctxMaze = canvasMaze.getContext('2d');
+let maze;
 
 function closeAllPop() {
     document.querySelectorAll(".pop").forEach(pop => { pop.remove(); });
