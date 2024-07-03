@@ -82,6 +82,11 @@ socket.on("playerJoined", ({ username }) => {
     }
 });
 
+socket.on("receiveUpdate", ({ ctx }) => {
+    document.querySelectorAll("canvas").remove();
+    document.querySelector("main").appendChild(ctx);
+})
+
 socket.on("startHosting", () => {
     // add logic here - like making a start game button visible
     // alert('The game may start');

@@ -4,6 +4,7 @@
 // const ctx = balls.getContext("2d");
 // const canvas = document.getElementById("balls");
 // const ctx = canvas.getContext("2d");
+const socket = io();
 
 const canvasMaze = document.getElementById('maze');
 const ctxMaze = canvasMaze.getContext('2d');
@@ -59,7 +60,7 @@ function first() {
     ctx.beginPath();
     ctx.lineWidth = 1;
     ctx.arc(15, 15, 10, 0, 2 * Math.PI);
-    ctx.fillStyle = "red";
+    ctx.fillStyle = userColor;
     ctx.fill();
     ctx.stroke();
 
@@ -596,7 +597,7 @@ function moving() {
     ctx.fillStyle = "red";
     // ctx.fillStyle = "rgba(0, 0, 255, 1.0)";
     ctx.fill();
-
+    socket.emit("updateHost", { ctx });
 
     let distanceToTarget = (x0 - targetx) ** 2 + (y0 - targety) ** 2;
 
