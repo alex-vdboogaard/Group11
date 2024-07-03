@@ -1,38 +1,15 @@
-// const canvasMaze = document.getElementById("maze");
-// const ctxMaze = canvasMaze.getContext("2d");
-// const balls = canvasMaze.cloneNode();
-// const ctx = balls.getContext("2d");
-// const canvas = document.getElementById("balls");
-// const ctx = canvas.getContext("2d");
-
-const canvasMaze = document.getElementById('maze');
-const ctxMaze = canvasMaze.getContext('2d');
-const canvas = document.getElementById('ball1');
-const ctx = canvas.getContext('2d');
-
-function move(element, direction, distance = 0) {
-    if (distance != 0) {
-        var topOrLeft = (direction == "left" || direction == "right") ? "left" : "top";
-        if (direction == "up" || direction == "left") { distance *= -1; }
-        var elStyle = window.getComputedStyle(element);
-        var value = elStyle.getPropertyValue(topOrLeft).replace("px", "");
-        console.log(value);
-        element.style[topOrLeft] = (Number(value) + distance) + "px";
-    }
-}
-
-var ball = document.getElementById("ball");
-
+const canvas = document.getElementById("myCanvas");
+const ctx = canvas.getContext("2d");
 
 let t = 1.0;
-let gravity = 3000;
+let speed = 1000;
 let bounciness = 2 / 10;
 const RADIUS = 10;
 
-let x0 = 110;
-let y0 = 110;
-let xf = 110;
-let yf = 110;
+let x0 = 250;
+let y0 = 250;
+let xf = 250;
+let yf = 250;
 
 let v0x = 0;
 let v0y = 0;
@@ -505,23 +482,6 @@ function moving() {
         vfy = 0;
         xf = x0;
         yf = y0;
-    }
-
-    console.log("Here");
-    console.log(xf);
-    deltaX = xf - x0;
-    deltaY = yf - y0;
-    if (deltaX < 0) {
-        move(ball, "left", -1 * deltaX);
-    }
-    else {
-        move(ball, "right", deltaX);
-    }
-    if (deltaY < 0) {
-        move(ball, "up", -1 * deltaY);
-    }
-    else {
-        move(ball, "down", deltaY);
     }
 
     v0x = vfx;
