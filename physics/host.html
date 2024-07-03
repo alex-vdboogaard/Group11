@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,16 +27,16 @@
     </div>  
 </body>
 <script src="/socket.io/socket.io.js"></script>
+<script src="../physics/host.js" defer></script>
 <script src="/physics/timer.js"></script>
-<!-- <script src="../js/utility.js"></script> -->
-<script src="/physics/host.js"></script>
+<script src="../js/utility.js"></script>
 <script>
-    // simplePop("success", "Game starting...");
-    (function () {
+    simplePop("success", "Game starting...");
+    (function() {
         const hostGameCode = document.getElementById("hostGameCode");
-        const gameID = localStorage.getItem('gameID');
-        const user1 = localStorage.getItem('user1');
-        const user2 = localStorage.getItem('user2');
+        const gameID = localStorage.getItem('gameID'); 
+        const user1 = localStorage.getItem('user1'); 
+        const user2 = localStorage.getItem('user2'); 
         // alert(gameID);
         hostGameCode.innerHTML = `Maze War! - ${gameID}`;
         document.querySelector("#user1").innerHTML = user1;
