@@ -1,43 +1,15 @@
-const canvas = document.getElementById("background");
+const canvas = document.getElementById("myCanvas");
 const ctx = canvas.getContext("2d");
-// const canvasMaze = document.getElementById("maze");
-// const ctxMaze = canvasMaze.getContext("2d");
-// const balls = canvasMaze.cloneNode();
-// const ctx = balls.getContext("2d");
-// const canvas = document.getElementById("balls");
-// const ctx = canvas.getContext("2d");
-
-const canvasMaze = document.getElementById('maze');
-const ctxMaze = canvasMaze.getContext('2d');
-const canvas = document.getElementById('ball1');
-const ctx = canvas.getContext('2d');
-
-function move(element, direction, distance = 0) {
-    if (distance != 0) {
-        var topOrLeft = (direction == "left" || direction == "right") ? "left" : "top";
-        if (direction == "up" || direction == "left") { distance *= -1; }
-        var elStyle = window.getComputedStyle(element);
-        var value = elStyle.getPropertyValue(topOrLeft).replace("px", "");
-        // console.log(value);
-        element.style[topOrLeft] = (Number(value) + distance) + "px";
-    }
-}
-
-var ball = document.getElementById("ball");
-
-// let closest = [-1, -1];
 
 let t = 1.0;
-let gravity = 3000;
-let bounciness = 9 / 10;
+let speed = 1000;
+let bounciness = 2 / 10;
 const RADIUS = 10;
 
-let x0 = 110;
-let y0 = 110;
-let xf = 110;
-let yf = 110;
-let targetx = 50;
-let targety = 50;
+let x0 = 250;
+let y0 = 250;
+let xf = 250;
+let yf = 250;
 
 let v0x = 0;
 let v0y = 0;
@@ -58,19 +30,19 @@ let cellSize;
 let zone;
 
 function first(){
-    ctx.beginPath();
-    ctx.lineWidth = 1;
-    ctx.arc(15, 15, 10, 0, 2 * Math.PI);
-    ctx.fillStyle = "red";
-    ctx.fill();
-    ctx.stroke();
+    // ctx.beginPath();
+    // ctx.lineWidth = 1;
+    // ctx.arc(xf, yf, 10, 0, 2 * Math.PI);
+    // ctx.fillStyle = "red";
+    // ctx.fill();
+    // ctx.stroke();
 
-    zone = new Array(canvasMaze.height +1);
-    for (let i = 0; i < canvasMaze.height +1; i++){
-        zone[i] = new Array( canvasMaze.width +1).fill(0);
+    zone = new Array(canvas.height +1);
+    for (let i = 0; i < canvas.height +1; i++){
+        zone[i] = new Array( canvas.width +1).fill(0);
     }
 }
-first()
+//first()
 
 
 function handleOrientation(event) {
@@ -428,45 +400,28 @@ function DrawMaze(Maze, ctx, cellsize) {
 function makeMaze() {
     //console.log("makeMaze");
     difficulty = 10
-    cellSize = canvasMaze.width / difficulty;
+    cellSize = canvas.width / difficulty;
     maze = new Maze(difficulty, difficulty);
 
-    zone = new Array(canvasMaze.height +1);
-    for (let i = 0; i < canvasMaze.height +1; i++){
-        zone[i] = new Array( canvasMaze.width +1).fill(0);
+    zone = new Array(canvas.height +1);
+    for (let i = 0; i < canvas.height +1; i++){
+        zone[i] = new Array( canvas.width +1).fill(0);
     }
-    draw = new DrawMaze(maze, ctxMaze, cellSize);
+    draw = new DrawMaze(maze, ctx, cellSize);
 
     tx = maze.startCoord().x * cellSize + cellSize / 2
     ty = maze.startCoord().y * cellSize + cellSize / 2
-
+    x0 = tx;
+    y0 = ty;
     xf = tx;
     yf = ty;
 
-    deltaX = xf - x0 +95;
-    deltaY = yf - y0 +95;
-    if (deltaX < 0) {
-        move(ball, "left", -1 * deltaX);
-    }
-    else {
-        move(ball, "right", deltaX);
-    }
-    if (deltaY < 0) {
-        move(ball, "up", -1 * deltaY);
-    }
-    else {
-        move(ball, "down", deltaY);
-    }
-
-    x0 = tx;
-    y0 = ty;
-
-    // ctx.lineWidth = 1;
-    // ctx.beginPath();
-    // ctx.arc(x0, y0, 10, 0, 2 * Math.PI);
-    // ctx.fillStyle = "red";
-    // ctx.fill();
-    // ctx.stroke();
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.arc(x0, y0, 10, 0, 2 * Math.PI);
+    ctx.fillStyle = "red";
+    ctx.fill();
+    ctx.stroke();
 }
 
 makeMaze();
@@ -475,33 +430,18 @@ makeMaze();
 /////////////////////////////////////////////////////////
 
 
-function collided(xff, yff){
-    xff = Math.floor(xff);
-    yff = Math.floor(yff);
-
-    // closest = [-1, -1];
-    // console.log(xff);
-    // let disclosest = 1000000;
+function collided(xf, yf){
+    xf = Math.floor(xf);
+    yf = Math.floor(yf);
     
-    for (let i = xff-RADIUS; i <= xff+RADIUS; i++){
-        for (let j = yff-RADIUS; j <= yff+RADIUS; j++){
+    for (let i = xf-RADIUS; i <= xf+RADIUS; i++){
+        for (let j = yf-RADIUS; j <= yf+RADIUS; j++){
             
-            let dis = ((xff-i)**2) + ((yff-j)**2)
-            if (dis <= RADIUS**2){
-                // console.log(i);
-                if (zone[i][j] == -1){
-
-                    // if (dis < disclosest){
-                    //     disclosest = dis;
-                    //     closest = [i, j];
-                    //     // console.log(closest[1]);
-                    // }
-                    return true;
-                }
+            if (zone[i][j] == -1){
+                return true;
             }
         }
     }
-    // return closest;
     return false;
 }
 
@@ -509,24 +449,19 @@ function collided(xff, yff){
 ///////////////////////////////////////////////////////
 
 function moving() {
-    //ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // draw = new DrawMaze(maze, ctxMaze, cellSize);
+    draw = new DrawMaze(maze, ctx, cellSize);
 
-    ax = gravity * Math.sin(g * Math.PI / 180);
-    ay = gravity * Math.sin(b * Math.PI / 180);
+    ax = speed * Math.sin(g * Math.PI / 180);
+    ay = speed * Math.sin(b * Math.PI / 180);
 
     vfx = v0x + ax * t / 1000.0;
     vfy = v0y + ay * t / 1000.0;
-    ///////////////////////////////////////////////////////////////////////////////// send positions to server
+
     xf = x0 + v0x * t / 1000.0 + 0.5 * ax * (t / 1000) ** 2;
     yf = y0 + v0y * t / 1000.0 + 0.5 * ay * (t / 1000) ** 2;
 
-    if (xf >= targetx - 40 && xf <= targetx + 40) {
-        if (yf >= targety - 40 && yf <= targety + 40) {
-            alert("You win");
-        }
-    }
 
     // if (xf < RADIUS) {
     //     xf = RADIUS;
@@ -542,65 +477,11 @@ function moving() {
     //     yf = canvas.height - RADIUS;
     //     vfy = -vfy * bounciness;
     // }
-
-    // collided(xf, yf);
-
-    // if (closest != [-1, -1]){
-    //     // console.log("Collided");
-    //     // distX = xf - closest[0];
-    //     // distY = yf - closest[1];
-    //     // let dist = Math.sqrt((distX)**2 + (distY)**2);
-
-    //     // let angX = Math.acos(Math.abs(distX)/dist);
-    //     // let angY = Math.asin(Math.abs(distY)/dist);
-
-    //     // xf = x0 + distX;
-    //     // yf = y0 + distY;
-
-    //     // vfx = -vfx * bounciness * Math.abs(angX);
-    //     // vfy = -vfy * bounciness * Math.abs(angY);
-        
-    // }
-
-    let collisionx = collided(xf, y0);
-    let collisiony = collided(x0, yf);
-    let collisionxy = collided(xf, yf);
-
-    if (collisionx && !collisiony){
-        xf = x0;
-        vfx = -vfx * bounciness;
-    }
-    if (!collisionx && collisiony){
-        yf = y0;
-        vfy = -vfy * bounciness;
-    }
-    if (collisionxy){
+    if (collided(xf, yf)){
+        vfx = 0;
+        vfy = 0;
         xf = x0;
         yf = y0;
-        let temp = vfx;
-        vfx = -vfy * bounciness;
-        vfy = -temp * bounciness;
-    }
-
-    
-
-
-
-    // console.log("Here");
-    // console.log(xf);
-    deltaX = xf - x0;
-    deltaY = yf - y0;
-    if (deltaX < 0) {
-        move(ball, "left", -1 * deltaX);
-    }
-    else {
-        move(ball, "right", deltaX);
-    }
-    if (deltaY < 0) {
-        move(ball, "up", -1 * deltaY);
-    }
-    else {
-        move(ball, "down", deltaY);
     }
 
     v0x = vfx;
@@ -608,24 +489,12 @@ function moving() {
     x0 = xf;
     y0 = yf;
 
-    // ctx.lineWidth = 1;
-    // ctx.beginPath();
-    // ctx.arc(xf, yf, RADIUS, 0, 2 * Math.PI);
-    // ctx.fillStyle = "red";
-    // ctx.fill();
-    // ctx.stroke();
+    ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.arc(xf, yf, RADIUS, 0, 2 * Math.PI);
     ctx.fillStyle = "red";
-    // ctx.fillStyle = "rgba(0, 0, 255, 1.0)";
     ctx.fill();
-
-    ctx.strokeStyle = "black";
     ctx.stroke();
-    ctx.arc(targety, targety, RADIUS, 0, 2 * Math.PI);
-    ctx.fill();
-    console.log(vfx);
-    // console.log(g); 
 }
 
 setInterval(moving, t);
