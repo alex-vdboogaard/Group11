@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,26 +9,28 @@
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../physics/host.css">
 </head>
+
 <body style="display: flex; align-items: center;">
     <div class="score">
-        <img src="../red-ball.jpg" style="width: 50px; height: 100%"/>
+        <img src="../red-ball.jpg" style="width: 50px; height: 100%" />
         <p class="paragraph" id="score-1">0</p>
-        <p class="paragraph" id="user1" >Username here</p>
-    </div>       
+        <p class="paragraph" id="user1">Username here</p>
+    </div>
     <main>
         <h1 id="hostGameCode">Game code - </h1>
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <h2><span id="minutes">03</span>:<span id="seconds">00</span></h2>
-            <button class="btn" style="margin-bottom: 10px;" id="reset-game" hidden >Reset game</button>
-        </div>   
-        <div id="canvas-wrapper" style="width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center;">
+            <button class="btn" style="margin-bottom: 10px;" id="reset-game" hidden>Reset game</button>
+        </div>
+        <div id="canvas-wrapper"
+            style="width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center;">
             <canvas id="maze" width="500" height="500" style="border:1px solid #000000;"></canvas>
         </div>
     </main>
     <div class="score">
-        <img src="../blue-ball.png" style="width: 50px; height: 100%"/>
+        <img src="../blue-ball.png" style="width: 50px; height: 100%" />
         <p class="paragraph" id="score-2">0</p>
-        <p class="paragraph" id="user2" >Username here</p>
+        <p class="paragraph" id="user2">Username here</p>
     </div>
 </body>
 <script src="/socket.io/socket.io.js"></script>
@@ -35,12 +38,12 @@
 <!-- <script src="../js/utility.js"></script> -->
 <script src="/physics/host.js"></script>
 <script>
-    simplePop("success", "Game starting...");
-    (function() {
+    // simplePop("success", "Game starting...");
+    (function () {
         const hostGameCode = document.getElementById("hostGameCode");
-        const gameID = localStorage.getItem('gameID'); 
-        const user1 = localStorage.getItem('user1'); 
-        const user2 = localStorage.getItem('user2'); 
+        const gameID = localStorage.getItem('gameID');
+        const user1 = localStorage.getItem('user1');
+        const user2 = localStorage.getItem('user2');
         // alert(gameID);
         hostGameCode.innerHTML = "Maze War! - " + gameID;
         document.querySelector("#user1").innerHTML = user1;

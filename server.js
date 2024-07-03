@@ -326,11 +326,14 @@ io.on('connection', (socket) => {
         io.to(gameId).emit('updateBalls', player1);
     });
 
+
     socket.on('startGame', (gameID) => {
         maze = new Maze(10, 10);
-        console.log({ map: maze.map(), startCoord: maze.startCoord(), endCoord: maze.endCoord() });
-        io.to(gameID).emit('startGameForPlayers', ({ map: maze.map(), startCoord: maze.startCoord(), endCoord: maze.endCoord() }));
+        let myMaze = { map: maze.map(), startCoord: maze.startCoord(), endCoord: maze.endCoord() };
+        console.log('AAAAAAAAAAAAAA', myMaze);
+        io.to(gameID).emit('startGameForPlayers', myMaze);
     })
+
 
     socket.on('timeUp', (gameID) => {
         //increment round

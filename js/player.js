@@ -186,7 +186,7 @@ function DrawMaze(Maze, ctx, cellsize) {
     }
 
     function drawEndFlag() {
-        var coord = Maze.endCoord();
+        var coord = Maze.endCoord;
         var gridSize = 4;
         var fraction = cellSize / gridSize - 2;
         var colorSwap = true;
@@ -236,11 +236,11 @@ function makeMaze() {
     }
     draw = new DrawMaze(maze, ctxMaze, cellSize);
 
-    tx = maze.startCoord().x * cellSize + cellSize / 2;
-    ty = maze.startCoord().y * cellSize + cellSize / 2;
+    tx = maze.startCoord.x * cellSize + cellSize / 2;
+    ty = maze.startCoord.y * cellSize + cellSize / 2;
 
-    targetx = maze.endCoord().x * cellSize;
-    targety = maze.endCoord().y * cellSize;
+    targetx = maze.endCoord.x * cellSize;
+    targety = maze.endCoord.y * cellSize;
 
     xf = tx;
     yf = ty;
@@ -610,7 +610,7 @@ function DrawMaze(Maze, ctx, cellsize) {
     }
 
     function drawEndFlag() {
-        var coord = Maze.endCoord();
+        var coord = Maze.endCoord;
         var gridSize = 4;
         var fraction = cellSize / gridSize - 2;
         var colorSwap = true;
@@ -660,11 +660,11 @@ function makeMaze() {
     }
     draw = new DrawMaze(maze, ctxMaze, cellSize);
 
-    tx = maze.startCoord().x * cellSize + cellSize / 2;
-    ty = maze.startCoord().y * cellSize + cellSize / 2;
+    tx = maze.startCoord.x * cellSize + cellSize / 2;
+    ty = maze.startCoord.y * cellSize + cellSize / 2;
 
-    targetx = maze.endCoord().x * cellSize;
-    targety = maze.endCoord().y * cellSize;
+    targetx = maze.endCoord.x * cellSize;
+    targety = maze.endCoord.y * cellSize;
 
     xf = tx;
     yf = ty;
@@ -740,9 +740,9 @@ joinForm.addEventListener("submit", (event) => {
                     username.value = '';
                     gameID.value = '';
 
-                    socket.on('startGameForPlayers', (maze) => {
-                        console.log("Maze: ", maze);
-                        maze = maze;
+                    socket.on('startGameForPlayers', (maze2) => {
+                        console.log("Maze: ", maze2);
+                        maze = maze2;
                         makeMaze();
                         // window.location.href = '/play';
                         document.getElementById("map").style.display = 'block';
