@@ -1,4 +1,3 @@
-
 // const canvasMaze = document.getElementById("maze");
 // const ctxMaze = canvasMaze.getContext("2d");
 // const balls = canvasMaze.cloneNode();
@@ -35,8 +34,8 @@ let x0 = 110;
 let y0 = 110;
 let xf = 110;
 let yf = 110;
-let targetx = 50;
-let targety = 50;
+let targetx = 0;
+let targety = 0;
 
 let v0x = 0;
 let v0y = 0;
@@ -417,7 +416,7 @@ function makeMaze() {
     ty = maze.startCoord().y * cellSize + cellSize / 2;
 
     targetx = maze.endCoord().x * cellSize + cellSize / 2;
-    targety = maze.endCoord().x * cellSize + cellSize / 2;
+    targety = maze.endCoord().y * cellSize + cellSize / 2;
 
     xf = tx;
     yf = ty;
@@ -548,11 +547,11 @@ function moving() {
         xf = x0;
         vfx = -vfx * bounciness;
     }
-    if (!collisionx && collisiony) {
+    else if (!collisionx && collisiony) {
         yf = y0;
         vfy = -vfy * bounciness;
     }
-    if (collisionxy) {
+    else if (collisionxy) {
         xf = x0;
         yf = y0;
         let temp = vfx;
@@ -601,7 +600,7 @@ function moving() {
 
     let distanceToTarget = (x0 - targetx) ** 2 + (y0 - targety) ** 2;
 
-    if (distanceToTarget < RADIUS ** 2) {
+    if (distanceToTarget <= RADIUS ** 2 - 5) {
         Window.alert("Won");
     }
 
