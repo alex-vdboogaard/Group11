@@ -107,9 +107,6 @@ async function requestDeviceOrientation() {
         alert('not supported')
     }
 }
-
-requestDeviceOrientation();
-
 /////////////////////////////////////////////////////////
 
 function rand(max) {
