@@ -8,6 +8,10 @@
     --mainBlue: #4931A8;
 }
 
+#map {
+    display: none;
+}
+
 main {
     padding: 20px;
     display: flex;
