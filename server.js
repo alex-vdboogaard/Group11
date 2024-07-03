@@ -155,6 +155,12 @@ io.on('connection', (socket) => {
         io.to(gameID).emit('resetGame', (game))
     })
 
+    // socket.on('Winner', (winner) => {
+    //     console.log('WINNER: ', winner, socket.id, gamesInSession[0].users);
+
+    //     socket.emit()
+    // })
+
     socket.on('roundEnd', (gameID, winner) => {
         //increment round
         console.log(winner);

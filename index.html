@@ -41,7 +41,9 @@
                 <canvas id="ball1" width="30" height="30" style="border:none ; position: absolute; top: 0px; left: 0px;">
                 </canvas>
             </div>
-            </main>
+
+        </main>
+        <button type="submit" id="tester">HIER</button>
         </body>
     </div>
     <script src="/socket.io/socket.io.js"></script>
@@ -51,6 +53,12 @@
     <script defer>
         document.querySelector("#request").addEventListener("click", () => {
             requestDeviceOrientation();
+        })
+
+        document.getElementById('tester').addEventListener('click', () => {
+            const socket = io();
+            socket.emit('Winner', 'hierrrrr');
+            alert('here');
         })
     </script>
 </body>
