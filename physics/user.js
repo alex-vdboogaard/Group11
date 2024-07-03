@@ -502,7 +502,6 @@ function moving() {
 
     if (xf >= targetx - 40 && xf <= targetx + 40) {
         if (yf >= targety - 40 && yf <= targety + 40) {
-            alert("You win");
         }
     }
 
