@@ -103,32 +103,41 @@ function generateGameID() {
 }
 //****************************************************************************************
 io.on('connection', (socket) => {
-    console.log('a user connected');
+    console.log('user connected');
 
     // create a new game on the game host
     // we want to be able to display the gameID on the game host UI 
     socket.on('createGame', () => {
+        var game = gamesInSession.find(gameObj => gameObj.gameID === gameID);
+        console.log('createGame', game);
+
         const gameID = generateGameID();
         console.log('created a game');
         socket.join(gameID);
         socket.emit('gameCreated', { gameID });
         console.log('Game created with a id of: ', gameID);
         console.log(gamesInSession);
-        gamesInSession.push({ "gameID": gameID, "users": [], "round": 0 });
+        gamesInSession.push({ "gameID": gameID, "host_socket": {}, "users": [], "round": 0 });
         console.log(gamesInSession);
+
+        game = gamesInSession.find(gameObj => gameObj.gameID === gameID);
+        console.log('createGame', game);
     });
 
     // allow players to join a game based on gameID
     socket.on('joinGame', ({ username, gameID }) => {
+
+        var game = gamesInSession.find(gameObj => gameObj.gameID === gameID);
+        console.log('joinGame', game);
         socket.join(gameID);
 
         console.log(gamesInSession);
-        const game = gamesInSession.find(gameObj => gameObj.gameID === gameID);
+        game = gamesInSession.find(gameObj => gameObj.gameID === gameID);
         if (game) {
             game.users.push({ "username": username, "score": 0, "socketID": socket.id, "orientation": { "beta": 0, "gamma": 0 } });
+            console.log(game);
+            console.log(game.users);
         }
-        console.log(gamesInSession);
-        console.log(game.users);
 
         io.to(gameID).emit('playerJoined', { username });
         console.log(`${username} joined game ${gameID}`);
@@ -136,6 +145,9 @@ io.on('connection', (socket) => {
         if (game.users.length >= 2 && game.users.length <= 4) {
             io.to(gameID).emit('startHosting');
         }
+
+        game = gamesInSession.find(gameObj => gameObj.gameID === gameID);
+        console.log('joinGame', game);
     });
 
     socket.on('changeOrientation', ({ username, gameId, beta, gamma }) => {
@@ -145,7 +157,27 @@ io.on('connection', (socket) => {
     });
 
     socket.on('startGame', (gameID) => {
+        var game = gamesInSession.find(gameObj => gameObj.gameID === gameID);
+        console.log('startGame', game);
+        // console.log(users);
         io.to(gameID).emit('startGameForPlayers');
+        // io.to(gameID).emit('sendDataToHost', users, gameID)
+
+        game = gamesInSession.find(gameObj => gameObj.gameID === gameID);
+        console.log('startGame', game);
+    })
+
+    socket.on('host', (gameID) => {
+        var game = gamesInSession.find(gameObj => gameObj.gameID === gameID);
+        console.log('host', game);
+
+        console.log('socket of host', socket.id, gameID);
+        console.log(gamesInSession);
+        game = gamesInSession.find(gameObj => gameObj.gameID === gameID);
+        console.log(game);
+        game.host_socket = socket;
+        console.log(game.users);
+        socket.emit('data_for_host', game.gameID, game.users)
     })
 
     socket.on('disconnecting', () => {

@@ -1,3 +1,36 @@
+const socket = io();
+document.querySelector("#start-game").addEventListener("click", () => {
+    requestDeviceOrientation();
+    simplePop("success", "Game starting...");
+});
+
+(function() {
+    const hostGameCode = document.getElementById("hostGameCode");
+    const gameID = localStorage.getItem('gameID'); 
+    // alert(gameID);
+    hostGameCode.innerHTML = "Maze War! - " + gameID;
+
+    // socket.on('sendDataToHost', (users, gameID) => {
+    //     alert('sendDataToHost', gameID);
+    // })
+
+    socket.emit('host', gameID);
+
+    socket.on('data_for_host', (gameID, users) => {
+        alert('Hier '  + gameID);
+        console.log('users', users);
+    })
+})();
+
+// socket.on('data_for_host', (gameID, users) => {
+//     alert('HierAAA', gameID);
+//     console.log('users', users);
+// })
+
+// socket.on('sendDataToHost', (users, gameID) => {
+//         alert('sendDataToHost2', gameID);
+// })
+// =================================================================
 const canvas = document.getElementById("background");
 const ctx = canvas.getContext("2d");
 
