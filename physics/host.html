@@ -21,7 +21,7 @@
             <button class="btn" style="margin-bottom: 10px;" id="reset-game" hidden >Reset game</button>
         </div>   
         <div id="canvas-wrapper" style="width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center;">
-            <canvas id="background" width="500" height="500" style="border:1px solid #000000;"></canvas>
+            <canvas id="maze" width="500" height="500" style="border:1px solid #000000;"></canvas>
         </div>
     </main>
     <div class="score">
@@ -31,9 +31,9 @@
     </div>
 </body>
 <script src="/socket.io/socket.io.js"></script>
-<script src="../physics/host.js" defer></script>
 <script src="/physics/timer.js"></script>
-<script src="../js/utility.js"></script>
+<!-- <script src="../js/utility.js"></script> -->
+<script src="/physics/host.js"></script>
 <script>
     simplePop("success", "Game starting...");
     (function() {

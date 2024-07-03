@@ -1,3 +1,5 @@
+
+
 function closeAllPop() {
     document.querySelectorAll(".pop").forEach(pop => { pop.remove(); });
 }
@@ -110,3 +112,7 @@ socket.on("updateBalls", ({ player1 }) => {
     player1Ball.left = player1.x;
     player1Ball.top = player1.y;
 })
+
+// socket.on("startGame", ({ maze }) => {
+//     console.log(maze);
+// })
