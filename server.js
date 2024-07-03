@@ -159,16 +159,16 @@ io.on('connection', (socket) => {
         io.to(gameID).emit('resetGame', (game))
     })
 
-    // socket.on('Winner', (winner) => {
-    //     console.log('WINNER: ', winner, socket.id, gamesInSession[0].users);
-
-    //     socket.emit()
-    // })
-
-    socket.on('roundEnd', () => {
-        console.log('ROUNDEND');
-        socket.emit('roundEndHost');
-        socket.emit("roundEndPlayers");
+    socket.on('roundEnd', (gameID, winner) => {
+        //increment round
+        console.log(winner);
+        let game = gamesInSession.find(el => el.gameID === gameID);
+        if (winner) {
+            let winner = game.users.find(el => el.username === winner);
+            winner.score += 1;
+        }
+        game.round += 1;
+        io.to(gameID).emit('resetGame', (game))
     })
 
 
