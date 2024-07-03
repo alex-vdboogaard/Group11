@@ -54,6 +54,8 @@ const simplePop = (type, message, position = "top") => {
 }
 
 const socket = io();
+let username1 = "";
+let username2 = "";
 
 // for /gamehost
 const HostBtn = document.getElementById("HostBtn");
@@ -72,7 +74,18 @@ socket.on("gameCreated", ({ gameID }) => {
 socket.on("playerJoined", ({ username }) => {
     // alert(`${username} has joined your game!`);
     simplePop("success", `${username} has joined your game!`);
+    if (!username1) {
+        username1 = username;
+    }
+    else {
+        username2 = username;
+    }
 });
+
+socket.on("receiveUpdate", ({ ctx }) => {
+    document.querySelectorAll("canvas").remove();
+    document.querySelector("main").appendChild(ctx);
+})
 
 socket.on("startHosting", () => {
     // add logic here - like making a start game button visible
@@ -85,6 +98,8 @@ HostBtn.addEventListener('click', () => {
     // start the game and host moves to a new screen
     socket.emit('startGame', document.getElementById("gameID").textContent);
     localStorage.setItem('gameID', document.getElementById("gameID").textContent);
+    localStorage.setItem('user1', username1);
+    localStorage.setItem('user2', username2);
     window.location.href = '/host';
     // hostGameCode.innerHTML = document.getElementById("gameID").textContent;
 });

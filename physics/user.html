@@ -10,7 +10,7 @@
 </head>
 <body style="display: flex; align-items: center; justify-content: center;">
     <main style="display: flex; align-items: center; width: 100vw; height: 100vh;"> 
-        <button id="request">Allow orientation</button>
+        <button id="request" class="btn">Allow orientation</button>
         <canvas id="maze" width="500" height="500"
         style="border:1px solid #000000; position: absolute; top: 100px; left: 100px;">
     </canvas>
@@ -22,6 +22,7 @@
     </div>
     </main>
 </body>
+<script src="/socket.io/socket.io.js"></script>
 <script src="../js/utility.js"></script>
 <script src="/physics/user.js"></script>
 <script defer>
