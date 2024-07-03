@@ -28,7 +28,7 @@ var ball = document.getElementById("ball");
 
 let t = 1.0;
 let gravity = 3000;
-let bounciness = 9 / 10;
+let bounciness = 3 / 10;
 const RADIUS = 10;
 
 let x0 = 110;
@@ -544,11 +544,26 @@ function moving() {
         xf = x0;
         vfx = -vfx * bounciness;
     }
-    if (!collisionx && collisiony) {
+    else if (collisiony && !collisionx){
         yf = y0;
         vfy = -vfy * bounciness;
     }
-    if (collisionxy) {
+    else if (collisionxy){
+        //console.log(collisionx, collisiony, collisionxy, v0x, v0y);
+        //window.alert(collisionx, collisiony, collisionxy, v0x, v0y);
+        // if (v0x == 0 || v0y == 0){
+        //     xf = x0;
+        //     yf = y0;
+        //     vfx = -vfx * bounciness;
+        //     vfy = -vfy * bounciness;
+        // }
+        // else {
+        //     xf = x0;
+        //     yf = y0;
+        //     let temp = vfx;
+        //     vfx = -vfy * bounciness;
+        //     vfy = -temp * bounciness;
+        // }
         xf = x0;
         yf = y0;
         let temp = vfx;
