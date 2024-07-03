@@ -148,6 +148,25 @@ io.on('connection', (socket) => {
         io.to(gameID).emit('startGameForPlayers');
     })
 
+    socket.on('timeUp', (gameID) => {
+        //increment round
+        let game = gamesInSession.find(el => el.gameID === gameID);
+        game.round += 1;
+        io.to(gameID).emit('resetGame', (game))
+    })
+
+    socket.on('roundEnd', (gameID, winner) => {
+        //increment round
+        console.log(winner);
+        let game = gamesInSession.find(el => el.gameID === gameID);
+        if (winner) {
+            let winner = game.users.find(el => el.username === winner);
+            winner.score += 1;
+        }
+        game.round += 1;
+        io.to(gameID).emit('resetGame', (game))
+    })
+
     socket.on('disconnecting', () => {
         for (const room of socket.rooms) {
             if (room !== socket.id) {

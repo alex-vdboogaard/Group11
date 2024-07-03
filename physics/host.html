@@ -18,7 +18,6 @@
         <h1 id="hostGameCode">Game code - </h1>
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <h2><span id="minutes">03</span>:<span id="seconds">00</span></h2>
-            <button class="btn" style="margin-bottom: 10px;" id="start-game">Start game</button>
             <button class="btn" style="margin-bottom: 10px;" id="reset-game" hidden >Reset game</button>
         </div>   
         <div id="canvas-wrapper">
@@ -38,11 +37,7 @@
 <script src="./timer.js"></script>
 <script src="../js/utility.js"></script>
 <script>
-    document.querySelector("#start-game").addEventListener("click", () => {
-        requestDeviceOrientation();
-        simplePop("success", "Game starting...");
-    });
-
+    simplePop("success", "Game starting...");
     (function() {
         const hostGameCode = document.getElementById("hostGameCode");
         const gameID = localStorage.getItem('gameID'); 

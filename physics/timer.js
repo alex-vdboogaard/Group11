@@ -2,7 +2,6 @@ let time = 180; // 3 minutes in seconds
 let timerInterval;
 
 const resetBtn = document.querySelector("#reset-game");
-const startBtn = document.querySelector("#start-game");
 
 const min = document.getElementById('minutes');
 const sec = document.getElementById('seconds');
@@ -20,21 +19,16 @@ function updateTimer() {
         clearInterval(timerInterval);
     }
 }
-
-startBtn.addEventListener("click", () => {
-    if (timerInterval) {
-        clearInterval(timerInterval);
-    }
-    timerInterval = setInterval(updateTimer, 1000);
-    startBtn.hidden = true;
-    resetBtn.hidden = false;
-});
+if (timerInterval) {
+    clearInterval(timerInterval);
+}
+timerInterval = setInterval(updateTimer, 1000);
+resetBtn.hidden = false;
 
 resetBtn.addEventListener("click", () => {
     clearInterval(timerInterval);
     time = 180;
     min.textContent = '03';
     sec.textContent = '00';
-    startBtn.hidden = false;
-    resetBtn.hidden = true;
+    timerInterval = setInterval(updateTimer, 1000);
 });
