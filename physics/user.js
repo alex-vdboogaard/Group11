@@ -552,8 +552,8 @@ function moving() {
         xf = x0;
         yf = y0;
         let temp = vfx;
-        vfx = -vfy * bounciness;
-        vfy = -temp * bounciness;
+        vfx = -Math.sign(vfx) * Math.abs(vfy) * bounciness;
+        vfy = -Math.sign(vfy) * Math.abs(temp) * bounciness;
     }
 
 
