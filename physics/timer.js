@@ -1,4 +1,8 @@
-let time = 180; // 3 minutes in seconds
+const socket = io();
+
+const hostGameCode = localStorage.getItem('gameID'); 
+
+let time = 15; // 3 minutes in seconds
 let timerInterval;
 
 const resetBtn = document.querySelector("#reset-game");
@@ -17,6 +21,7 @@ function updateTimer() {
         time--;
     } else {
         clearInterval(timerInterval);
+        socket.emit('roundEnd', hostGameCode, '');
     }
 }
 if (timerInterval) {

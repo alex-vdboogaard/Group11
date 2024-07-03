@@ -607,7 +607,10 @@ setInterval(moving, t);
 //moving()
 
 
-
+// (function () {
+//     const socket = io();
+//     socket.emit("updateSocket", {});
+// })();
 
 
 

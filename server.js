@@ -31,7 +31,7 @@ let g = 0;
 
 
 // arr of all active sessions' gameIDs stored in an array
-var gamesInSession = [];
+let gamesInSession = [];
 
 //****************************************************************************************
 //middleware
@@ -108,6 +108,7 @@ io.on('connection', (socket) => {
     // create a new game on the game host
     // we want to be able to display the gameID on the game host UI 
     socket.on('createGame', () => {
+        console.log('CREATE GAME')
         const gameID = generateGameID();
         console.log('created a game');
         socket.join(gameID);
@@ -157,34 +158,40 @@ io.on('connection', (socket) => {
 
     socket.on('roundEnd', (gameID, winner) => {
         //increment round
-        console.log(winner);
+        console.log('abc', winner, gameID, gamesInSession[0].users);
         let game = gamesInSession.find(el => el.gameID === gameID);
-        if (winner) {
+        if (winner != '' && game) {
             let winner = game.users.find(el => el.username === winner);
             winner.score += 1;
         }
         game.round += 1;
-        io.to(gameID).emit('resetGame', (game))
+        io.to(gameID).emit('resetGame', (game));
     })
 
-    socket.on('disconnecting', () => {
-        for (const room of socket.rooms) {
-            if (room !== socket.id) {
-                // io.to(room).emit("user has left", socket.id);
+    socket.on('updateSocket', () => {
+        console.log("new socket", socket.id);
+    })
 
-                const game = gamesInSession.find(gameObj => gameObj.gameID == room);
+    // socket.on('disconnecting', () => {
+    //     console.log("DISCONNECTING", gamesInSession);
+    //     for (const room of socket.rooms) {
+    //         if (room !== socket.id) {
+    //             // io.to(room).emit("user has left", socket.id);
 
-                if (game) {
-                    // Find the index of the user in the game's users array
-                    const userIndex = game.users.findIndex(user => user.socketID == socket.id);
-                    if (userIndex !== -1) {
-                        // Remove the user from the users array
-                        game.users.splice(userIndex, 1);
-                    }
-                }
-            }
-        }
-    });
+    //             const game = gamesInSession.find(gameObj => gameObj.gameID == room);
+
+    //             if (game) {
+    //                 // Find the index of the user in the game's users array
+    //                 const userIndex = game.users.findIndex(user => user.socketID == socket.id);
+    //                 if (userIndex !== -1) {
+    //                     // Remove the user from the users array
+    //                     game.users.splice(userIndex, 1);
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     console.log("DISCONNECTING 2", gamesInSession);
+    // });
 });
 
 //****************************************************************************************
