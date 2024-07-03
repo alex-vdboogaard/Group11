@@ -76,7 +76,6 @@ socket.on("gameCreated", ({ gameID }) => {
 });
 
 socket.on("playerJoined", ({ username }) => {
-    // alert(`${username} has joined your game!`);
     simplePop("success", `${username} has joined your game!`);
     if (!username1) {
         username1 = username;
@@ -102,8 +101,6 @@ socket.on("startHosting", () => {
 
 HostBtn.addEventListener('click', () => {
     // start the game and host moves to a new screen
-    alert("Works");
-    console.log("HIII");
     socket.emit('startGame', document.getElementById("gameID").textContent);
     localStorage.setItem('gameID', document.getElementById("gameID").textContent);
     localStorage.setItem('user1', username1);
