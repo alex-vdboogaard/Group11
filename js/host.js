@@ -291,3 +291,5 @@ socket.on('startGameForPlayers', (maze2) => {
     document.getElementById("map").style.display = 'block';
     document.getElementById("join-game-main").style.display = 'none';
 })
+
+// test
