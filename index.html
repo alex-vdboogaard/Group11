@@ -24,16 +24,16 @@
                 <label for="username">Username</label>
                 <input type="text" id="username" placeholder="Anakin Skywalker" required>
             </div>
-            <button class="btn" type="submit">Join</button>
+            <button id="joinbtn" class="btn" type="submit">Join</button>
         </form>
 
     </main>
     <div id="map">
         <body style="display: flex; align-items: center; justify-content: center;">
             <main style="display: flex; align-items: center; width: 100vw; height: 100vh;"> 
-                <button id="request" class="btn">Allow orientation</button>
+                <button style="margin-bottom: 10px;" id="request" class="btn">Allow orientation</button>
                 <canvas id="maze" width="500" height="500"
-                style="border:1px solid #000000; position: absolute; top: 100px; left: 100px;">
+                style="border:1px solid #000000;">
             </canvas>
         
             <div id="ball"
