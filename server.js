@@ -287,6 +287,14 @@ function Maze(Width, Height) {
 io.on('connection', (socket) => {
     console.log('a user connected');
 
+    socket.on('hostConnected', (gameID) => {
+        const game = gamesInSession.find(gameObj => gameObj.gameID === gameID);
+        if (game) {
+            game.game_socket = socket;
+            console.log(game, socket.id);
+        }
+    });
+
     // create a new game on the game host
     // we want to be able to display the gameID on the game host UI 
     socket.on('createGame', () => {
@@ -296,7 +304,7 @@ io.on('connection', (socket) => {
         socket.emit('gameCreated', { gameID });
         console.log('Game created with a id of: ', gameID);
         console.log(gamesInSession);
-        gamesInSession.push({ "gameID": gameID, "users": [], "round": 0 });
+        gamesInSession.push({ "gameID": gameID, "game_socket": {}, "users": [], "round": 0 });
         console.log(gamesInSession);
     });
 
@@ -341,6 +349,14 @@ io.on('connection', (socket) => {
         game.round += 1;
         io.to(gameID).emit('resetGame', (game))
     })
+
+    socket.on('Won', (gameID) => {
+        console.log('WONNNNN', gameID);
+        let game = gamesInSession.find(el => el.gameID === gameID);
+        if (game) {
+            game.game_socket.emit('winner');
+        }
+    });
 
     socket.on('roundEnd', (gameID, winner) => {
         //increment round
