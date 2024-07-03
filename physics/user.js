@@ -602,7 +602,7 @@ function moving() {
     let distanceToTarget = (x0 - targetx) ** 2 + (y0 - targety) ** 2;
 
     if (distanceToTarget <= RADIUS ** 2 - 5) {
-        Window.alert("Won");
+        alert("Won");
     }
 
     // console.log(g); 
