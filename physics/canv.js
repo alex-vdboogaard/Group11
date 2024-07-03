@@ -566,11 +566,26 @@ function moving() {
         vfy = -vfy * bounciness;
     }
     else if (collisionxy){
+        //console.log(collisionx, collisiony, collisionxy, v0x, v0y);
+        //window.alert(collisionx, collisiony, collisionxy, v0x, v0y);
+        // if (v0x == 0 || v0y == 0){
+        //     xf = x0;
+        //     yf = y0;
+        //     vfx = -vfx * bounciness;
+        //     vfy = -vfy * bounciness;
+        // }
+        // else {
+        //     xf = x0;
+        //     yf = y0;
+        //     let temp = vfx;
+        //     vfx = -vfy * bounciness;
+        //     vfy = -temp * bounciness;
+        // }
         xf = x0;
         yf = y0;
         let temp = vfx;
-        vfx = -vfy * bounciness;
-        vfy = -temp * bounciness;
+        vfx = -Math.sign(vfx) * Math.abs(vfy) * bounciness;
+        vfy = -Math.sign(vfy) * Math.abs(temp) * bounciness;
     }
 
     
