@@ -30,7 +30,7 @@ var ball = document.getElementById("ball");
 
 let t = 1.0;
 let gravity = 3000;
-let bounciness = 4 / 10;
+let bounciness = 2 / 10;
 const RADIUS = 10;
 
 let x0 = 110;
@@ -602,7 +602,7 @@ function moving() {
 
     //socket.emit("updateHost", { ctx });
 
-    if ((targetx < xf && xf < targetx +cellSize) && (targety < yf && yf < targety +cellSize)) {
+    if ((targetx < xf && xf < targetx + cellSize) && (targety < yf && yf < targety + cellSize)) {
         window.alert("Won");
     }
 
