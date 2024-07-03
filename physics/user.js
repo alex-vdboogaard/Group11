@@ -4,7 +4,9 @@
 // const ctx = balls.getContext("2d");
 // const canvas = document.getElementById("balls");
 // const ctx = canvas.getContext("2d");
-const socket = io();
+
+
+//const socket = io();
 
 const canvasMaze = document.getElementById('maze');
 const ctxMaze = canvasMaze.getContext('2d');
@@ -416,8 +418,8 @@ function makeMaze() {
     tx = maze.startCoord().x * cellSize + cellSize / 2;
     ty = maze.startCoord().y * cellSize + cellSize / 2;
 
-    targetx = maze.endCoord().x * cellSize + cellSize / 2;
-    targety = maze.endCoord().y * cellSize + cellSize / 2;
+    targetx = maze.endCoord().x * cellSize;
+    targety = maze.endCoord().y * cellSize;
 
     xf = tx;
     yf = ty;
@@ -592,17 +594,16 @@ function moving() {
     // ctx.fillStyle = "red";
     // ctx.fill();
     // ctx.stroke();
-    ctx.beginPath();
-    ctx.arc(xf, yf, RADIUS, 0, 2 * Math.PI);
-    ctx.fillStyle = "red";
-    // ctx.fillStyle = "rgba(0, 0, 255, 1.0)";
-    ctx.fill();
-    socket.emit("updateHost", { ctx });
+    // ctx.beginPath();
+    // ctx.arc(xf, yf, RADIUS, 0, 2 * Math.PI);
+    // ctx.fillStyle = "red";
+    // // ctx.fillStyle = "rgba(0, 0, 255, 1.0)";
+    // ctx.fill();
 
-    let distanceToTarget = (x0 - targetx) ** 2 + (y0 - targety) ** 2;
+    //socket.emit("updateHost", { ctx });
 
-    if (distanceToTarget <= RADIUS ** 2 - 5) {
-        alert("Won");
+    if ((targetx < xf && xf < targetx +cellSize) && (targety < yf && yf < targety +cellSize)) {
+        window.alert("Won");
     }
 
     // console.log(g); 
