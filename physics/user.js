@@ -1,5 +1,4 @@
-const canvas = document.getElementById("background");
-const ctx = canvas.getContext("2d");
+
 // const canvasMaze = document.getElementById("maze");
 // const ctxMaze = canvasMaze.getContext("2d");
 // const balls = canvasMaze.cloneNode();
@@ -57,7 +56,7 @@ let cellSize;
 
 let zone;
 
-function first(){
+function first() {
     ctx.beginPath();
     ctx.lineWidth = 1;
     ctx.arc(15, 15, 10, 0, 2 * Math.PI);
@@ -65,9 +64,9 @@ function first(){
     ctx.fill();
     ctx.stroke();
 
-    zone = new Array(canvasMaze.height +1);
-    for (let i = 0; i < canvasMaze.height +1; i++){
-        zone[i] = new Array( canvasMaze.width +1).fill(0);
+    zone = new Array(canvasMaze.height + 1);
+    for (let i = 0; i < canvasMaze.height + 1; i++) {
+        zone[i] = new Array(canvasMaze.width + 1).fill(0);
     }
 }
 first()
@@ -111,17 +110,6 @@ async function requestDeviceOrientation() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 /////////////////////////////////////////////////////////
 
 function rand(max) {
@@ -129,15 +117,12 @@ function rand(max) {
 }
 
 function shuffle(a) {
-for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-}
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
     return a;
 }
-
-
-
 
 function Maze(Width, Height) {
     //console.log("Maze");
@@ -148,34 +133,34 @@ function Maze(Width, Height) {
     var dirs = ["n", "s", "e", "w"];
     var modDir = {
         n: {
-        y: -1,
-        x: 0,
-        o: "s"
+            y: -1,
+            x: 0,
+            o: "s"
         },
         s: {
-        y: 1,
-        x: 0,
-        o: "n"
+            y: 1,
+            x: 0,
+            o: "n"
         },
         e: {
-        y: 0,
-        x: 1,
-        o: "w"
+            y: 0,
+            x: 1,
+            o: "w"
         },
         w: {
-        y: 0,
-        x: -1,
-        o: "e"
+            y: 0,
+            x: -1,
+            o: "e"
         }
     };
 
-    this.map = function() {
+    this.map = function () {
         return mazeMap;
     };
-    this.startCoord = function() {
+    this.startCoord = function () {
         return startCoord;
     };
-    this.endCoord = function() {
+    this.endCoord = function () {
         return endCoord;
     };
 
@@ -185,12 +170,12 @@ function Maze(Width, Height) {
             mazeMap[y] = new Array(width);
             for (x = 0; x < width; ++x) {
                 mazeMap[y][x] = {
-                n: false,
-                s: false,
-                e: false,
-                w: false,
-                visited: false,
-                priorPos: null
+                    n: false,
+                    s: false,
+                    e: false,
+                    w: false,
+                    visited: false,
+                    priorPos: null
                 };
             }
         }
@@ -233,8 +218,8 @@ function Maze(Width, Height) {
                         mazeMap[nx][ny].priorPos = pos;
                         //Update Cell position to newly visited location
                         pos = {
-                        x: nx,
-                        y: ny
+                            x: nx,
+                            y: ny
                         };
                         cellsVisited++;
                         //Recursively call this method on the next tile
@@ -257,46 +242,46 @@ function Maze(Width, Height) {
 
     function defineStartEnd() {
         switch (rand(4)) {
-        case 0:
-            startCoord = {
-            x: 0,
-            y: 0
-            };
-            endCoord = {
-            x: height - 1,
-            y: width - 1
-            };
-            break;
-        case 1:
-            startCoord = {
-            x: 0,
-            y: width - 1
-            };
-            endCoord = {
-            x: height - 1,
-            y: 0
-            };
-            break;
-        case 2:
-            startCoord = {
-            x: height - 1,
-            y: 0
-            };
-            endCoord = {
-            x: 0,
-            y: width - 1
-            };
-            break;
-        case 3:
-            startCoord = {
-            x: height - 1,
-            y: width - 1
-            };
-            endCoord = {
-            x: 0,
-            y: 0
-            };
-            break;
+            case 0:
+                startCoord = {
+                    x: 0,
+                    y: 0
+                };
+                endCoord = {
+                    x: height - 1,
+                    y: width - 1
+                };
+                break;
+            case 1:
+                startCoord = {
+                    x: 0,
+                    y: width - 1
+                };
+                endCoord = {
+                    x: height - 1,
+                    y: 0
+                };
+                break;
+            case 2:
+                startCoord = {
+                    x: height - 1,
+                    y: 0
+                };
+                endCoord = {
+                    x: 0,
+                    y: width - 1
+                };
+                break;
+            case 3:
+                startCoord = {
+                    x: height - 1,
+                    y: width - 1
+                };
+                endCoord = {
+                    x: 0,
+                    y: 0
+                };
+                break;
         }
     }
 
@@ -306,35 +291,31 @@ function Maze(Width, Height) {
 }
 
 
-
-
-
-
 function DrawMaze(Maze, ctx, cellsize) {
     //console.log("DrawMaze");
     var map = Maze.map();
     var cellSize = cellsize;
     var drawEndMethod;
     ctx.lineWidth = 2;
-  
-    this.redrawMaze = function(size) {
+
+    this.redrawMaze = function (size) {
         cellSize = size;
         //ctx.lineWidth = cellSize / 50;
         drawMap();
         drawEndMethod();
     };
-  
+
     function drawCell(xCord, yCord, cell) {
         var x = xCord * cellSize;
         var y = yCord * cellSize;
-    
+
         if (cell.n == false) {
             ctx.beginPath();
             ctx.moveTo(x, y);
             ctx.lineTo(x + cellSize, y);
             ctx.stroke();
 
-            for (let i = x; i < x + cellSize; i++){
+            for (let i = x; i < x + cellSize; i++) {
                 //console.log(i + " " + y);
                 zone[i][y] = -1;
             }
@@ -344,8 +325,8 @@ function DrawMaze(Maze, ctx, cellsize) {
             ctx.moveTo(x, y + cellSize);
             ctx.lineTo(x + cellSize, y + cellSize);
             ctx.stroke();
-            
-            for (let i = x; i < x + cellSize; i++){
+
+            for (let i = x; i < x + cellSize; i++) {
                 //console.log(i + " " + y + cellSize);
                 zone[i][y + cellSize] = -1;
             }
@@ -355,8 +336,8 @@ function DrawMaze(Maze, ctx, cellsize) {
             ctx.moveTo(x + cellSize, y);
             ctx.lineTo(x + cellSize, y + cellSize);
             ctx.stroke();
-            
-            for (let i = y; i < y + cellSize; i++){
+
+            for (let i = y; i < y + cellSize; i++) {
                 //console.log(x + cellSize + " " + i);
                 zone[x + cellSize][i] = -1;
             }
@@ -366,14 +347,14 @@ function DrawMaze(Maze, ctx, cellsize) {
             ctx.moveTo(x, y);
             ctx.lineTo(x, y + cellSize);
             ctx.stroke();
-            
-            for (let i = y; i < y + cellSize; i++){
+
+            for (let i = y; i < y + cellSize; i++) {
                 //console.log(x + " " + i);
                 zone[x][i] = -1;
             }
         }
     }
-  
+
     function drawMap() {
         for (x = 0; x < map.length; x++) {
             for (y = 0; y < map[x].length; y++) {
@@ -381,7 +362,7 @@ function DrawMaze(Maze, ctx, cellsize) {
             }
         }
     }
-  
+
     function drawEndFlag() {
         var coord = Maze.endCoord();
         var gridSize = 4;
@@ -409,20 +390,17 @@ function DrawMaze(Maze, ctx, cellsize) {
             }
         }
     }
-  
+
     function clear() {
         var canvasSize = cellSize * map.length;
         ctx.clearRect(0, 0, canvasSize, canvasSize);
     }
-  
+
     drawEndMethod = drawEndFlag;
     clear();
     drawMap();
     drawEndMethod();
 }
-
-
-
 
 
 function makeMaze() {
@@ -431,9 +409,9 @@ function makeMaze() {
     cellSize = canvasMaze.width / difficulty;
     maze = new Maze(difficulty, difficulty);
 
-    zone = new Array(canvasMaze.height +1);
-    for (let i = 0; i < canvasMaze.height +1; i++){
-        zone[i] = new Array( canvasMaze.width +1).fill(0);
+    zone = new Array(canvasMaze.height + 1);
+    for (let i = 0; i < canvasMaze.height + 1; i++) {
+        zone[i] = new Array(canvasMaze.width + 1).fill(0);
     }
     draw = new DrawMaze(maze, ctxMaze, cellSize);
 
@@ -443,8 +421,8 @@ function makeMaze() {
     xf = tx;
     yf = ty;
 
-    deltaX = xf - x0 +95;
-    deltaY = yf - y0 +95;
+    deltaX = xf - x0 + 95;
+    deltaY = yf - y0 + 95;
     if (deltaX < 0) {
         move(ball, "left", -1 * deltaX);
     }
@@ -475,21 +453,21 @@ makeMaze();
 /////////////////////////////////////////////////////////
 
 
-function collided(xff, yff){
+function collided(xff, yff) {
     xff = Math.floor(xff);
     yff = Math.floor(yff);
 
     // closest = [-1, -1];
     // console.log(xff);
     // let disclosest = 1000000;
-    
-    for (let i = xff-RADIUS; i <= xff+RADIUS; i++){
-        for (let j = yff-RADIUS; j <= yff+RADIUS; j++){
-            
-            let dis = ((xff-i)**2) + ((yff-j)**2)
-            if (dis <= RADIUS**2){
+
+    for (let i = xff - RADIUS; i <= xff + RADIUS; i++) {
+        for (let j = yff - RADIUS; j <= yff + RADIUS; j++) {
+
+            let dis = ((xff - i) ** 2) + ((yff - j) ** 2)
+            if (dis <= RADIUS ** 2) {
                 // console.log(i);
-                if (zone[i][j] == -1){
+                if (zone[i][j] == -1) {
 
                     // if (dis < disclosest){
                     //     disclosest = dis;
@@ -559,22 +537,22 @@ function moving() {
 
     //     // vfx = -vfx * bounciness * Math.abs(angX);
     //     // vfy = -vfy * bounciness * Math.abs(angY);
-        
+
     // }
 
     let collisionx = collided(xf, y0);
     let collisiony = collided(x0, yf);
     let collisionxy = collided(xf, yf);
 
-    if (collisionx && !collisiony){
+    if (collisionx && !collisiony) {
         xf = x0;
         vfx = -vfx * bounciness;
     }
-    if (!collisionx && collisiony){
+    if (!collisionx && collisiony) {
         yf = y0;
         vfy = -vfy * bounciness;
     }
-    if (collisionxy){
+    if (collisionxy) {
         xf = x0;
         yf = y0;
         let temp = vfx;
@@ -582,7 +560,7 @@ function moving() {
         vfy = -temp * bounciness;
     }
 
-    
+
 
 
 
