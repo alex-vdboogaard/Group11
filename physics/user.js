@@ -61,7 +61,7 @@ function first() {
     ctx.beginPath();
     ctx.lineWidth = 1;
     ctx.arc(15, 15, 10, 0, 2 * Math.PI);
-    ctx.fillStyle = userColor;
+    ctx.fillStyle = "red";
     ctx.fill();
     ctx.stroke();
 
