@@ -144,8 +144,12 @@ io.on('connection', (socket) => {
         io.to(gameId).emit('updateBalls', player1);
     });
 
+
     socket.on('startGame', (gameID) => {
-        io.to(gameID).emit('startGameForPlayers');
+        maze = new Maze(10, 10);
+        let myMaze = { map: maze.map(), startCoord: maze.startCoord(), endCoord: maze.endCoord() };
+        console.log('AAAAAAAAAAAAAA', myMaze);
+        io.to(gameID).emit('startGameForPlayers', myMaze);
     })
 
     socket.on('timeUp', (gameID) => {
