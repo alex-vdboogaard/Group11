@@ -5,6 +5,7 @@
 // const canvas = document.getElementById("balls");
 // const ctx = canvas.getContext("2d");
 const socket = io();
+
 function closeAllPop() {
     document.querySelectorAll(".pop").forEach(pop => { pop.remove(); });
 }
@@ -139,8 +140,6 @@ function handleOrientation(event) {
     b = Math.min(Math.max(beta, -60), 60);
     g = Math.min(Math.max(gamma, -60), 60);
 }
-
-
 
 async function requestDeviceOrientation() {
     if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
@@ -348,7 +347,6 @@ function Maze(Width, Height) {
     defineMaze();
 }
 
-
 function DrawMaze(Maze, ctx, cellsize) {
     //console.log("DrawMaze");
     var map = Maze.map();
@@ -460,7 +458,6 @@ function DrawMaze(Maze, ctx, cellsize) {
     drawEndMethod();
 }
 
-
 function makeMaze() {
     //console.log("makeMaze");
     difficulty = 10
@@ -510,9 +507,7 @@ function makeMaze() {
 
 makeMaze();
 
-
 /////////////////////////////////////////////////////////
-
 
 function collided(xff, yff) {
     xff = Math.floor(xff);
@@ -543,7 +538,6 @@ function collided(xff, yff) {
     // return closest;
     return false;
 }
-
 
 ///////////////////////////////////////////////////////
 
@@ -667,9 +661,13 @@ function moving() {
         socket.emit('roundEnd', {});
     }
 
-    
+
     // console.log(g); 
 }
+socket.on("roundEndPlayers", () => {
+    simplePop("success", "A player won, maze restarted!")
+    makeMaze();
+})
 
 setInterval(moving, t);
 

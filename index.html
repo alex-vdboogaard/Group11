@@ -57,8 +57,7 @@
 
         document.getElementById('tester').addEventListener('click', () => {
             const socket = io();
-            socket.emit('Winner', 'hierrrrr');
-            alert('here');
+            socket.emit('roundEnd');
         })
     </script>
 </body>
