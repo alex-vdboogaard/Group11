@@ -28,7 +28,7 @@ var ball = document.getElementById("ball");
 
 let t = 1.0;
 let gravity = 3000;
-let bounciness = 9 / 10;
+let bounciness = 4 / 10;
 const RADIUS = 10;
 
 let x0 = 110;
@@ -63,6 +63,7 @@ function first() {
     ctx.fillStyle = "red";
     ctx.fill();
     ctx.stroke();
+
 
     zone = new Array(canvasMaze.height + 1);
     for (let i = 0; i < canvasMaze.height + 1; i++) {
@@ -412,8 +413,11 @@ function makeMaze() {
     }
     draw = new DrawMaze(maze, ctxMaze, cellSize);
 
-    tx = maze.startCoord().x * cellSize + cellSize / 2
-    ty = maze.startCoord().y * cellSize + cellSize / 2
+    tx = maze.startCoord().x * cellSize + cellSize / 2;
+    ty = maze.startCoord().y * cellSize + cellSize / 2;
+
+    targetx = maze.endCoord().x * cellSize + cellSize / 2;
+    targety = maze.endCoord().x * cellSize + cellSize / 2;
 
     xf = tx;
     yf = ty;
@@ -497,10 +501,10 @@ function moving() {
     xf = x0 + v0x * t / 1000.0 + 0.5 * ax * (t / 1000) ** 2;
     yf = y0 + v0y * t / 1000.0 + 0.5 * ay * (t / 1000) ** 2;
 
-    if (xf >= targetx - 40 && xf <= targetx + 40) {
-        if (yf >= targety - 40 && yf <= targety + 40) {
-        }
-    }
+    // if (xf >= targetx - 40 && xf <= targetx + 40) {
+    //     if (yf >= targety - 40 && yf <= targety + 40) {
+    //     }
+    // }
 
     // if (xf < RADIUS) {
     //     xf = RADIUS;
@@ -594,11 +598,13 @@ function moving() {
     // ctx.fillStyle = "rgba(0, 0, 255, 1.0)";
     ctx.fill();
 
-    ctx.strokeStyle = "black";
-    ctx.stroke();
-    ctx.arc(targety, targety, RADIUS, 0, 2 * Math.PI);
-    ctx.fill();
-    console.log(vfx);
+
+    let distanceToTarget = (x0 - targetx) ** 2 + (y0 - targety) ** 2;
+
+    if (distanceToTarget < RADIUS ** 2) {
+        Window.alert("Won");
+    }
+
     // console.log(g); 
 }
 
