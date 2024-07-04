@@ -292,6 +292,9 @@ io.on('connection', (socket) => {
         if (game) {
             game.game_socket = socket;
             console.log(game, socket.id);
+            // (game.game_socket).emit('startGameForHost', game.maze);
+            // io.to(game.game_socket.id).to('startGameForHost', game.maze);
+            socket.emit('startGameForHost', game.maze);
         }
     });
 
@@ -304,7 +307,7 @@ io.on('connection', (socket) => {
         socket.emit('gameCreated', { gameID });
         console.log('Game created with a id of: ', gameID);
         console.log(gamesInSession);
-        gamesInSession.push({ "gameID": gameID, "game_socket": {}, "users": [], "round": 0 });
+        gamesInSession.push({ "gameID": gameID, "game_socket": {}, "maze": {}, "users": [], "round": 0 });
         console.log(gamesInSession);
     });
 
@@ -340,6 +343,14 @@ io.on('connection', (socket) => {
         let myMaze = { map: maze.map(), startCoord: maze.startCoord(), endCoord: maze.endCoord() };
         console.log('AAAAAAAAAAAAAA', myMaze);
         io.to(gameID).emit('startGameForPlayers', myMaze);
+
+        // display maze on the host
+        let game = gamesInSession.find(gameObj => gameObj.gameID === gameID);
+        if (game) {
+            console.log("HOST", game)
+            game.maze =  myMaze;
+            // game.game_socket.emit('startGameForHost', myMaze);
+        }
     })
 
 
@@ -354,7 +365,7 @@ io.on('connection', (socket) => {
         console.log('WONNNNN', gameID);
         let game = gamesInSession.find(el => el.gameID === gameID);
         if (game) {
-            game.game_socket.emit('winner');
+            (game.game_socket).emit('winner');
         }
     });
 

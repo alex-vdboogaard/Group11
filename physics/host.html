@@ -17,8 +17,19 @@
             <button class="btn" style="margin-bottom: 10px;" id="reset-game" hidden >Reset game</button>
         </div>   
         <div id="canvas-wrapper" style="width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center;">
-            <canvas id="maze" width="500" height="500" style="border:1px solid #000000;"></canvas>
+            <!-- <canvas id="maze" width="500" height="500" style="border:1px solid #000000;"></canvas> -->
+            <canvas id="maze" width="500" height="500" 
+                style="border:1px solid black; position: absolute; top: 100px; left: 100px;">
+            </canvas>
+        
+            <div id="ball"
+                style="background-color:transparent; border: none; position:absolute; width:30px; height:30px; top:100px; left:100px;">
+                <canvas id="ball1" width="30" height="30" style="border:none ; position: absolute; top: 0px; left: 0px;">
+                </canvas>
+            </div>
+            
         </div>
+
     </main>
     <div class="score">
         <img src="../red-ball.jpg" style="width: 50px; height: 100%"/>
@@ -30,28 +41,47 @@
 <script src="/socket.io/socket.io.js"></script>
 <script src="/physics/timer.js"></script>
 <script src="../js/utility.js"></script>
+<script src="../js/maze.js"></script>
 <script>
-    simplePop("success", "Game starting...");
-    const socket = io();
-    (function () {
-        const hostGameCode = document.getElementById("hostGameCode");
-        const gameID = localStorage.getItem('gameID');
-        const user1 = localStorage.getItem('user1');
-        const user2 = localStorage.getItem('user2');
-        // alert(gameID);
-        hostGameCode.innerHTML = `Maze War! - ${gameID}`;
-        document.querySelector("#user1").innerHTML = user1;
-        document.querySelector("#user2").innerHTML = user2;
+    // simplePop("success", "Game starting...");
+    // const socket = io();
+    // (function () {
+    //     const hostGameCode = document.getElementById("hostGameCode");
+    //     const gameID = localStorage.getItem('gameID');
+    //     const user1 = localStorage.getItem('user1');
+    //     const user2 = localStorage.getItem('user2');
+    //     // alert(gameID);
+    //     hostGameCode.innerHTML = `Maze War! - ${gameID}`;
+    //     document.querySelector("#user1").innerHTML = user1;
+    //     document.querySelector("#user2").innerHTML = user2;
 
 
-        socket.emit('hostConnected', gameID);
+    //     socket.emit('hostConnected', gameID);
 
-        
-    })();
+    // //     socket.on('startGameForHost', (maze2) => {
+    // //     alert('Got the maze on the host')
+    // //     console.log("Maze: ", maze2);
+    // //     maze = maze2;
+    // //     makeMaze();
+    // //     // window.location.href = '/play';
+    // //     document.getElementById("map").style.display = 'block';
+    // //     document.getElementById("join-game-main").style.display = 'none';
+    // // })
+    // })();
 
-    socket.on('winner', () => {
-        simplePop("success", "There was a winner");
-    })
+    // socket.on('winner', () => {
+    //     simplePop("success", "There was a winner");
+    // })
+
+    // socket.on('startGameForHost', (maze2) => {
+    //     alert('Got the maze on the host')
+    //     console.log("Maze: ", maze2);
+    //     maze = maze2;
+    //     makeMaze();
+    //     // window.location.href = '/play';
+    //     document.getElementById("map").style.display = 'block';
+    //     document.getElementById("join-game-main").style.display = 'none';
+    // })
 </script>
 
 </html>

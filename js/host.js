@@ -281,11 +281,3 @@ function makeMaze() {
 }
 
 
-socket.on('startGameForPlayers', (maze2) => {
-    console.log("Maze: ", maze2);
-    maze = maze2;
-    makeMaze();
-    // window.location.href = '/play';
-    document.getElementById("map").style.display = 'block';
-    document.getElementById("join-game-main").style.display = 'none';
-})
