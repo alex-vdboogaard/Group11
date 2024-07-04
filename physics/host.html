@@ -13,11 +13,22 @@
 </head>
 <body style="display: flex; align-items: center; flex-direction: column;">     
     <main>
-        <h1 id="hostGameCode">Game code - </h1>
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <h2><span id="minutes">03</span>:<span id="seconds">00</span></h2>
-            <button class="btn" style="margin-bottom: 10px;" id="reset-game" hidden >Reset game</button>
-        </div>   
+        <div style="display: flex;">
+            <div style="width: 450px;">
+                <h1 id="hostGameCode">Game code - </h1>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h2><span id="minutes">03</span>:<span id="seconds">00</span></h2>
+                    <button class="btn" style="margin-bottom: 10px;" id="reset-game" hidden >Reset game</button>
+                </div>   
+            </div>
+            <div class="score">
+                <!-- <img src="../red-ball.jpg" style="width: 50px; height: 100%"/> -->
+                <p class="paragraph" style="font-weight: 500; margin-bottom: 5px;">Players:</p>
+                <p class="paragraph" style="margin: 0px;" id="user1" >Username here</p>
+                <p class="paragraph" style="margin: 0px;" id="user2" >Username here</p>
+            </div> 
+        </div>
+        
         <div id="canvas-wrapper" style="width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center;">
             <!-- <canvas id="maze" width="500" height="500" style="border:1px solid #000000;"></canvas> -->
             <canvas id="maze" width="500" height="500" 
@@ -38,13 +49,7 @@
             
         </div>
 
-    </main>
-    <div class="score">
-        <img src="../red-ball.jpg" style="width: 50px; height: 100%"/>
-        <p class="paragraph" style="font-weight: 500; margin-bottom: 5px;">Players:</p>
-        <p class="paragraph" style="margin: 0px;" id="user1" >Username here</p>
-        <p class="paragraph" style="margin: 0px;" id="user2" >Username here</p>
-    </div>  
+    </main> 
 </body>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/physics/timer.js"></script>
