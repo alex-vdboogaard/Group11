@@ -280,17 +280,31 @@ function makeMaze() {
 
     deltaX = xf - x0 + 95;
     deltaY = yf - y0 + 95;
+
     if (deltaX < 0) {
-        move(ball, "left", -1 * deltaX);
+        move(ballOne, "left", -1 * deltaX);
     }
     else {
-        move(ball, "right", deltaX);
+        move(ballOne, "right", deltaX);
     }
     if (deltaY < 0) {
-        move(ball, "up", -1 * deltaY);
+        move(ballOne, "up", -1 * deltaY);
     }
     else {
-        move(ball, "down", deltaY);
+        move(ballOne, "down", deltaY);
+    }
+
+    if (deltaX < 0) {
+        move(ballTwo, "left", -1 * deltaX);
+    }
+    else {
+        move(ballTwo, "right", deltaX);
+    }
+    if (deltaY < 0) {
+        move(ballTwo, "up", -1 * deltaY);
+    }
+    else {
+        move(ballTwo, "down", deltaY);
     }
 
     x0 = tx;
@@ -373,16 +387,29 @@ function moving() {
     deltaX = xf - x0;
     deltaY = yf - y0;
     if (deltaX < 0) {
-        move(ball, "left", -1 * deltaX);
+        move(ballOne, "left", -1 * deltaX);
     }
     else {
-        move(ball, "right", deltaX);
+        move(ballOne, "right", deltaX);
     }
     if (deltaY < 0) {
-        move(ball, "up", -1 * deltaY);
+        move(ballOne, "up", -1 * deltaY);
     }
     else {
-        move(ball, "down", deltaY);
+        move(ballOne, "down", deltaY);
+    }
+
+    if (deltaX < 0) {
+        move(ballTwo, "left", -1 * deltaX);
+    }
+    else {
+        move(ballTwo, "right", deltaX);
+    }
+    if (deltaY < 0) {
+        move(ballTwo, "up", -1 * deltaY);
+    }
+    else {
+        move(ballTwo, "down", deltaY);
     }
 
     v0x = vfx;
@@ -540,16 +567,29 @@ function makeMaze() {
     deltaX = xf - x0 + 95;
     deltaY = yf - y0 + 95;
     if (deltaX < 0) {
-        move(ball, "left", -1 * deltaX);
+        move(ballOne, "left", -1 * deltaX);
     }
     else {
-        move(ball, "right", deltaX);
+        move(ballOne, "right", deltaX);
     }
     if (deltaY < 0) {
-        move(ball, "up", -1 * deltaY);
+        move(ballOne, "up", -1 * deltaY);
     }
     else {
-        move(ball, "down", deltaY);
+        move(ballOne, "down", deltaY);
+    }
+
+    if (deltaX < 0) {
+        move(ballTwo, "left", -1 * deltaX);
+    }
+    else {
+        move(ballTwo, "right", deltaX);
+    }
+    if (deltaY < 0) {
+        move(ballTwo, "up", -1 * deltaY);
+    }
+    else {
+        move(ballTwo, "down", deltaY);
     }
 
     x0 = tx;
