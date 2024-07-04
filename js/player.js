@@ -3508,7 +3508,7 @@ joinForm.addEventListener("submit", (event) => {
     const gameID = document.getElementById("gameID").value;
 
 
-    if (!checkUserName(username)) {
+    if (!checkUserName(username.toLowerCase())) {
         simplePop("error", `Error - inappropriate username`);
     }
     else if (!checkSpaces(username)) {
