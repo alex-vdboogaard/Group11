@@ -17,7 +17,7 @@ simplePop("success", "Game starting...");
 
         
         socket.on('startGameForHost', (maze2) => {
-            alert(socket.id);
+            // alert(socket.id);
             console.log("Maze: ", maze2);
             maze = maze2;
             makeMaze();
