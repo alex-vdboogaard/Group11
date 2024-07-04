@@ -3189,7 +3189,7 @@ function moving() {
     y0 = yf;
 
     if ((targetx < xf && xf < targetx + cellSize) && (targety < yf && yf < targety + cellSize)) {
-        window.alert("Won");
+
 
         socket.emit('Won', document.getElementById("gameID").value);
         clearInterval(intervalID);

@@ -27,7 +27,6 @@ simplePop("success", "Game starting...");
 
     socket.on('winner', () => {
         simplePop("success", "There was a winner");
-        socket.emit('startGame', localStorage.getItem('gameID'));
     })
 
 const canvasMaze = document.getElementById('maze');
