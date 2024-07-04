@@ -311,6 +311,22 @@ io.on('connection', (socket) => {
         console.log(gamesInSession);
     });
 
+    socket.on('updateBallPosition', ({gameID, x, y, socketID}) => {
+        // console.log(x, y);
+        // console.log(socketID);
+        // console.log(gamesInSession[0].users);
+        const game = gamesInSession.find(gameObj => gameObj.gameID === gameID);
+        if (game) {
+            const userIndex = game.users.findIndex(user => user.socketID == socketID);
+            // console.log(userIndex);
+            if (userIndex != -1) {
+
+                const username = game.users[userIndex].username;
+                io.to(game.game_socket.id).emit('changePositionOnHost', x, y, username);
+            }
+        }
+    })
+
     // allow players to join a game based on gameID
     socket.on('joinGame', ({ username, gameID }) => {
         socket.join(gameID);

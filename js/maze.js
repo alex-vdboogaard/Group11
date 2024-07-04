@@ -15,14 +15,13 @@ simplePop("success", "Game starting...");
 
         socket.emit('hostConnected', gameID);
 
+        
         socket.on('startGameForHost', (maze2) => {
-            // alert('Got the maze on the host')
+            alert(socket.id);
             console.log("Maze: ", maze2);
             maze = maze2;
             makeMaze();
-            // window.location.href = '/play';
-            // document.getElementById("map").style.display = 'block';
-            // document.getElementById("join-game-main").style.display = 'none';
+            
         })
     })();
 
@@ -30,20 +29,13 @@ simplePop("success", "Game starting...");
         simplePop("success", "There was a winner");
     })
 
-    // socket.on('startGameForHost', (maze2) => {
-    //     alert('Got the maze on the host')
-    //     console.log("Maze: ", maze2);
-    //     maze = maze2;
-    //     makeMaze();
-    //     // window.location.href = '/play';
-    //     document.getElementById("map").style.display = 'block';
-    //     document.getElementById("join-game-main").style.display = 'none';
-    // })
-
 const canvasMaze = document.getElementById('maze');
 const ctxMaze = canvasMaze.getContext('2d');
-const canvas = document.getElementById('ball1');
-const ctx = canvas.getContext('2d');
+const canvasOne = document.getElementById('ball1');
+const canvasTwo = document.getElementById('ball2');
+const ctxOne = canvasOne.getContext('2d');
+const ctxTwo = canvasTwo.getContext('2d');
+
 
 function move(element, direction, distance = 0) {
     if (distance != 0) {
@@ -56,7 +48,8 @@ function move(element, direction, distance = 0) {
     }
 }
 
-var ball = document.getElementById("ball");
+var ballOne = document.getElementById("ballOne");
+var ballTwo = document.getElementById("ballTwo");
 
 // let closest = [-1, -1];
 
@@ -91,12 +84,20 @@ let cellSize;
 let zone;
 
 function first() {
-    ctx.beginPath();
-    ctx.lineWidth = 1;
-    ctx.arc(15, 15, 10, 0, 2 * Math.PI);
-    ctx.fillStyle = "red";
-    ctx.fill();
-    ctx.stroke();
+    // if (localStorage.getItem('user1'))
+    ctxOne.beginPath();
+    ctxOne.lineWidth = 1;
+    ctxOne.arc(15, 15, 10, 0, 2 * Math.PI);
+    ctxOne.fillStyle = "red";
+    ctxOne.fill();
+    ctxOne.stroke();
+
+    ctxTwo.beginPath();
+    ctxTwo.lineWidth = 1;
+    ctxTwo.arc(15, 15, 10, 0, 2 * Math.PI);
+    ctxTwo.fillStyle = "blue";
+    ctxTwo.fill();
+    ctxTwo.stroke();
 
 
     zone = new Array(canvasMaze.height + 1);
@@ -295,12 +296,7 @@ function makeMaze() {
     x0 = tx;
     y0 = ty;
 
-    // ctx.lineWidth = 1;
-    // ctx.beginPath();
-    // ctx.arc(x0, y0, 10, 0, 2 * Math.PI);
-    // ctx.fillStyle = "red";
-    // ctx.fill();
-    // ctx.stroke();
+
 }
 
 
@@ -354,44 +350,6 @@ function moving() {
     xf = x0 + v0x * t / 1000.0 + 0.5 * ax * (t / 1000) ** 2;
     yf = y0 + v0y * t / 1000.0 + 0.5 * ay * (t / 1000) ** 2;
 
-    // if (xf >= targetx - 40 && xf <= targetx + 40) {
-    //     if (yf >= targety - 40 && yf <= targety + 40) {
-    //     }
-    // }
-
-    // if (xf < RADIUS) {
-    //     xf = RADIUS;
-    //     vfx = -vfx * bounciness;
-    // } else if (xf > canvas.width - RADIUS) {
-    //     xf = canvas.width - RADIUS;
-    //     vfx = -vfx * bounciness;
-    // }
-    // if (yf < RADIUS) {
-    //     yf = RADIUS;
-    //     vfy = -vfy * bounciness;
-    // } else if (yf > canvas.height - RADIUS) {
-    //     yf = canvas.height - RADIUS;
-    //     vfy = -vfy * bounciness;
-    // }
-
-    // collided(xf, yf);
-
-    // if (closest != [-1, -1]){
-    //     // console.log("Collided");
-    //     // distX = xf - closest[0];
-    //     // distY = yf - closest[1];
-    //     // let dist = Math.sqrt((distX)**2 + (distY)**2);
-
-    //     // let angX = Math.acos(Math.abs(distX)/dist);
-    //     // let angY = Math.asin(Math.abs(distY)/dist);
-
-    //     // xf = x0 + distX;
-    //     // yf = y0 + distY;
-
-    //     // vfx = -vfx * bounciness * Math.abs(angX);
-    //     // vfy = -vfy * bounciness * Math.abs(angY);
-
-    // }
 
     let collisionx = collided(xf, y0);
     let collisiony = collided(x0, yf);
@@ -412,13 +370,6 @@ function moving() {
         vfx = -Math.sign(vfx) * Math.abs(vfy) * bounciness;
         vfy = -Math.sign(vfy) * Math.abs(temp) * bounciness;
     }
-
-
-
-
-
-    // console.log("Here");
-    // console.log(xf);
     deltaX = xf - x0;
     deltaY = yf - y0;
     if (deltaX < 0) {
@@ -439,19 +390,7 @@ function moving() {
     x0 = xf;
     y0 = yf;
 
-    // ctx.lineWidth = 1;
-    // ctx.beginPath();
-    // ctx.arc(xf, yf, RADIUS, 0, 2 * Math.PI);
-    // ctx.fillStyle = "red";
-    // ctx.fill();
-    // ctx.stroke();
-    // ctx.beginPath();
-    // ctx.arc(xf, yf, RADIUS, 0, 2 * Math.PI);
-    // ctx.fillStyle = "red";
-    // // ctx.fillStyle = "rgba(0, 0, 255, 1.0)";
-    // ctx.fill();
 
-    //socket.emit("updateHost", { ctx });
 
     if ((targetx < xf && xf < targetx + cellSize) && (targety < yf && yf < targety + cellSize)) {
         window.alert("Won");
@@ -464,20 +403,6 @@ function moving() {
 }
 
 intervalID = setInterval(moving, t);
-
-//moving()
-
-
-
-
-
-
-
-
-
-
-
-
 
 function DrawMaze(Maze, ctx, cellsize) {
     //console.log("DrawMaze");
@@ -630,11 +555,42 @@ function makeMaze() {
     x0 = tx;
     y0 = ty;
 
-    // ctx.lineWidth = 1;
-    // ctx.beginPath();
-    // ctx.arc(x0, y0, 10, 0, 2 * Math.PI);
-    // ctx.fillStyle = "red";
-    // ctx.fill();
-    // ctx.stroke();
+
 }
 
+socket.on('changePositionOnHost', (x, y, username) => {
+    console.log(x,y);
+    console.log(username);
+
+    if (username == localStorage.getItem('user1') )
+    {
+        if (x < 0) {
+            move(ballOne, "left", -1 * x);
+        }
+        else {
+            move(ballOne, "right", x);
+        }
+        if (y < 0) {
+            move(ballOne, "up", -1 * y);
+        }
+        else {
+            move(ballOne, "down", y);
+        }
+    }
+    else {
+
+        if (x < 0) {
+            move(ballTwo, "left", -1 * x);
+        }
+        else {
+            move(ballTwo, "right", x);
+        }
+        if (y < 0) {
+            move(ballTwo, "up", -1 * y);
+        }
+        else {
+            move(ballTwo, "down", y);
+        }
+    }
+
+})
