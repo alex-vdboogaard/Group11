@@ -3146,44 +3146,7 @@ function moving() {
     xf = x0 + v0x * t / 1000.0 + 0.5 * ax * (t / 1000) ** 2;
     yf = y0 + v0y * t / 1000.0 + 0.5 * ay * (t / 1000) ** 2;
 
-    // if (xf >= targetx - 40 && xf <= targetx + 40) {
-    //     if (yf >= targety - 40 && yf <= targety + 40) {
-    //     }
-    // }
 
-    // if (xf < RADIUS) {
-    //     xf = RADIUS;
-    //     vfx = -vfx * bounciness;
-    // } else if (xf > canvas.width - RADIUS) {
-    //     xf = canvas.width - RADIUS;
-    //     vfx = -vfx * bounciness;
-    // }
-    // if (yf < RADIUS) {
-    //     yf = RADIUS;
-    //     vfy = -vfy * bounciness;
-    // } else if (yf > canvas.height - RADIUS) {
-    //     yf = canvas.height - RADIUS;
-    //     vfy = -vfy * bounciness;
-    // }
-
-    // collided(xf, yf);
-
-    // if (closest != [-1, -1]){
-    //     // console.log("Collided");
-    //     // distX = xf - closest[0];
-    //     // distY = yf - closest[1];
-    //     // let dist = Math.sqrt((distX)**2 + (distY)**2);
-
-    //     // let angX = Math.acos(Math.abs(distX)/dist);
-    //     // let angY = Math.asin(Math.abs(distY)/dist);
-
-    //     // xf = x0 + distX;
-    //     // yf = y0 + distY;
-
-    //     // vfx = -vfx * bounciness * Math.abs(angX);
-    //     // vfy = -vfy * bounciness * Math.abs(angY);
-
-    // }
 
     let collisionx = collided(xf, y0);
     let collisiony = collided(x0, yf);
@@ -3205,12 +3168,6 @@ function moving() {
         vfy = -Math.sign(vfy) * Math.abs(temp) * bounciness;
     }
 
-
-
-
-
-    // console.log("Here");
-    // console.log(xf);
     deltaX = xf - x0;
     deltaY = yf - y0;
     if (deltaX < 0) {
@@ -3231,27 +3188,20 @@ function moving() {
     x0 = xf;
     y0 = yf;
 
-    // ctx.lineWidth = 1;
-    // ctx.beginPath();
-    // ctx.arc(xf, yf, RADIUS, 0, 2 * Math.PI);
-    // ctx.fillStyle = "red";
-    // ctx.fill();
-    // ctx.stroke();
-    // ctx.beginPath();
-    // ctx.arc(xf, yf, RADIUS, 0, 2 * Math.PI);
-    // ctx.fillStyle = "red";
-    // // ctx.fillStyle = "rgba(0, 0, 255, 1.0)";
-    // ctx.fill();
-
-    //socket.emit("updateHost", { ctx });
-
     if ((targetx < xf && xf < targetx + cellSize) && (targety < yf && yf < targety + cellSize)) {
         window.alert("Won");
+
         socket.emit('Won', document.getElementById("gameID").value);
         clearInterval(intervalID);
         return;
     }
 
+    socket.emit('updateBallPosition', {
+        gameID: document.getElementById("gameID").value,
+        x: deltaX,
+        y: deltaY,
+        socketID: socket.id
+    });
     // console.log(g); 
 }
 
